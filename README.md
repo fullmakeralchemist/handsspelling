@@ -116,59 +116,54 @@ When working on custom models for object detection or other machine learning tas
 <img src="media/dog.png" width="60%">
 </p>
 
-### Part 1: Introduction and Setup for Roboflow
-Welcome to Part 1 of our three-part tutorial series on Building Your Own Real-Time Object Detection App: Roboflow(YOLOv8) and Streamlit. In this series, we will walk you through the process of building an end-to-end object detection app that can identify objects from a photo. This web app was built only for images because we are using [share.streamlit.io](http://share.streamlit.io/) this is the Streamlit project hub where you can post your Streamlit projects free and it has a limit of 1 GB memory space for the app, there is a few libraries that cover a lot of that space so in another post or series I’ll add more about video and webcam functions to complement this app.
-
-In Part 1, we will introduce the project, give you a demo of the app in action, and explain why I chose Roboflow and Streamlit for this project. We will also guide you through the setup process, including installing dependencies and creating the necessary files and directories.
-
-By the end of this series, you will have the skills to build your own object detection app. So, let’s dive in!
-
-#### Demo of the Object Detection App
-This is the web app demo from the project that we are going to create and build together in the Streamlit share cloud. The app Object Detection will Upload an image on the WebApp and show detected objects.
-
-#### Object Detection
-Object detection is a computer vision solution that identifies instances of objects in visual media. Object detection scripts draw a bounding box around an instance of a detected object, paired with a label to represent the contents of the box. For example, a person in an image might be labeled “person” and a car might be labeled “vehicle”.
-
-#### What is YOLOv8?
-YOLOv8 is the newest state-of-the-art YOLO model that can be used for object detection, image classification, and instance segmentation tasks. YOLOv8 was developed by Ultralytics, this model is used in Roboflow.
-
-#### Why Should I Use YOLOv8?
-Here are a few main reasons why you should consider using YOLOv8 for your next computer vision project:
-
-YOLOv8 has a high rate of accuracy measured by COCO and Roboflow 100.
-YOLOv8 comes with a lot of developer-convenience features,an a well-structured Python package.
-The labeling tool is easy to use and you don’t need to install a tool for that.
-And last but not least is not difficult to run it also is faster than use a notebook with TensorFlow. In my case it takes 3 hours to train the model in Google Colab but with Roboflow it took me a few minutes.
-Why Streamlit is a Good Choice for Building a ML App
-Streamlit makes it easy to build web-based user interfaces for machine learning applications, enabling data scientists and developers to share their work with non-technical stakeholders.
-
-Streamlit is an open-source framework that simplifies the process of building web applications in Python. And it has it’s own project cloud that makes really easy deploy your project.
-
-Project Setup: Installing Dependencies and Creating Required Files and Directories
-Before diving into the project, make sure you have the following dependencies installed on your system. In my case I’m a Windows user so everything in this tutorial is working for July 2023 in Windows 11.
-
-For this project I have Python 3.11 but in Streamlit cloud only has the version 3.8 to 3.11 so I recommend using that range of versions and the Python packages that we will use will be PyTorch, Ultralytics and Streamlit. We can install these packages using pip into a separate virtual environment.
-
-#### Creating Virtual Environment
-When working on a Python project, it’s important to keep your dependencies separate from your global Python environment to prevent conflicts between different projects, especially with Pytorch.
-
-Make sure you already have installed Python, VS code(or other IDE) and Git. Follow the next steps:
-
-Create a new virtual environment by running the following command in the terminal after venv you can name as you wish your environment:
-
-
-### Prerequisites
+## Prerequisites
 
 This is short list things you need to use the guide. 
 
 * Python
 * Git
 
-Before installing the libraries in Raspberry Pi run the following code lines in the Raspberry Pi terminal:
+## Part 1: Introduction and Setup for Roboflow
+Welcome to Part 1 of our three-part tutorial series on Building Your Own Real-Time Object Detection App: Roboflow(YOLOv8) and Streamlit. In this series, we will walk you through the process of building an end-to-end object detection app that can identify objects from a photo. This web app was built only for images because we are using [share.streamlit.io](http://share.streamlit.io/) this is the Streamlit project hub where you can post your Streamlit projects free and it has a limit of 1 GB memory space for the app, there is a few libraries that cover a lot of that space so in another post or series I’ll add more about video and webcam functions to complement this app.
 
+In Part 1, we will introduce the project, give you a demo of the app in action, and explain why I chose Roboflow and Streamlit for this project. We will also guide you through the setup process, including installing dependencies and creating the necessary files and directories.
+
+By the end of this series, you will have the skills to build your own object detection app. So, let’s dive in!
+
+### Demo of the Object Detection App
+This is the [web app](https://objectdetection-eduardo.streamlit.app/) demo from the project that we are going to create and build together in the Streamlit share cloud. The app Object Detection will Upload an image on the WebApp and show detected objects.
+
+### Object Detection
+Object detection is a computer vision solution that identifies instances of objects in visual media. Object detection scripts draw a bounding box around an instance of a detected object, paired with a label to represent the contents of the box. For example, a person in an image might be labeled “person” and a car might be labeled “vehicle”.
+
+### What is YOLOv8?
+YOLOv8 is the newest state-of-the-art YOLO model that can be used for object detection, image classification, and instance segmentation tasks. YOLOv8 was developed by [Ultralytics](https://ultralytics.com/?ref=blog.roboflow.com), this model is used in Roboflow.
+
+### Why Should I Use YOLOv8?
+Here are a few main reasons why you should consider using YOLOv8 for your next computer vision project:
+
+YOLOv8 has a high rate of accuracy measured by COCO and Roboflow 100.
+YOLOv8 comes with a lot of developer-convenience features,an a well-structured Python package.
+The labeling tool is easy to use and you don’t need to install a tool for that.
+And last but not least is not difficult to run it also is faster than use a notebook with TensorFlow. In my case it takes 3 hours to train the model in Google Colab but with Roboflow it took me a few minutes.
+### Why Streamlit is a Good Choice for Building a ML App
+[Streamlit](https://docs.streamlit.io/) makes it easy to build web-based user interfaces for machine learning applications, enabling data scientists and developers to share their work with non-technical stakeholders.
+
+Streamlit is an open-source framework that simplifies the process of building web applications in Python. And it has it’s own project cloud that makes really easy deploy your project.
+
+### Project Setup: Installing Dependencies and Creating Required Files and Directories
+Before diving into the project, make sure you have the following dependencies installed on your system. In my case I’m a Windows user so everything in this tutorial is working for July 2023 in Windows 11.
+
+For this project I have Python 3.11 but in Streamlit cloud only has the version 3.8 to 3.11 so I recommend using that range of versions and the Python packages that we will use will be PyTorch, Ultralytics and Streamlit. We can install these packages using pip into a separate virtual environment.
+
+### Creating Virtual Environment
+When working on a Python project, it’s important to keep your dependencies separate from your global Python environment to prevent conflicts between different projects, especially with Pytorch.
+
+Make sure you already have installed Python, VS code(or other IDE) and Git. Follow the next steps:
+
+Create a new virtual environment by running the following command in the terminal after venv you can name as you wish your environment:
 ```
-sudo apt update
-sudo apt upgrade
+python -m venv env
 ```
 After updating and upgrading we will write the following command:
 
