@@ -183,7 +183,7 @@ At this point we will have the amount of images that we need but the name of eac
 
 link codigo
 
-#### Create a project with Roboflow
+### Create a project with Roboflow
 Building a custom dataset can be a painful process. It might take dozens or even hundreds of hours to collect images, label them, and export them in the proper format. Fortunately, Roboflow makes this process straightforward. If you only have images, you can label them in [Roboflow Annotate](https://docs.roboflow.com/annotate?ref=blog.roboflow.com). (When starting from scratch, consider [annotating large batches of images via API](https://docs.roboflow.com/annotate/annotate-api?ref=blog.roboflow.com) or use the [model-assisted labeling](https://blog.roboflow.com/announcing-label-assist/) tool to speed things up.)
 
 Before you start, you need to create a Roboflow [account](https://app.roboflow.com/login?ref=blog.roboflow.com). Once you do that, you can create a new project in the Roboflow dashboard.
@@ -192,35 +192,30 @@ Before you start, you need to create a Roboflow [account](https://app.roboflow.c
 <img src="media/1.png" width="60%">
 </p>
 
-The Paho package provides a client class which enables applications to connect to an MQTT broker to publish messages, and to subscribe to topics and receive published messages. In this project, the Python script is going to publish messages to the ESP8266 to turn the GPIOs on and off to control the lights.
-To install paho-mqtt run the following command:
+Keep in mind to choose the right project type. In this case choose, Object Detection.
 
-```
-sudo pip install paho-mqtt
-```
+<p align="center">
+<img src="media/2.png" width="60%">
+</p>
 
-And those are the steps that we will follow to set up our Raspberry Pi. In any case, this specific setup can be seen in the corresponding [Raspberry_Script](https://github.com/fullmakeralchemist/tinyml-mapping-backlight/tree/master/Raspberry_Script) folder.
+### Upload your images
+Add data to your newly created project. You can do it through the [web interface](https://docs.roboflow.com/adding-data/object-detection?ref=blog.roboflow.com). If you don’t have a dataset, you can grab one from [Roboflow Universe](https://universe.roboflow.com/?ref=blog.roboflow.com).
 
-Now lets see the setup for the Arduino IDE
+If you drag and drop a directory with a data set in a supported format, the Roboflow dashboard will automatically read the images and annotations together. To create a data set with annotations locally in Windows check [this post](https://medium.com/@lalodatos/label-your-images-with-labelimg-in-windows-for-object-detection-models-1b0a66f00a7b).
 
-#### Setup Arduino IDE
+<p align="center">
+<img src="media/3.png" width="60%">
+</p>
 
-To install the ESP8266 Board Package enter:
+<p align="center">
+<img src="media/4.png" width="60%">
+</p>
 
-```
-http://arduino.esp8266.com/stable/package_esp8266com_index.json
-```
-Into Additional Board Manager URLs field in the Arduino v1.6.4+ preferences.
+After all images uploaded you can click Save and Continue.
 
-<center>
-<img src="assets/boardurl.png" width="60%">
-</center>
-
-Next, use the Board manager to install the ESP8266 package.
-
-<center>
-<img src="assets/boardmanager.png" width="60%">
-</center>
+<p align="center">
+<img src="media/5.png" width="60%">
+</p>
 
 After the install process, you should see that esp8266 package is marked INSTALLED. Close the Boards Manager window once the install process has completed.
 
