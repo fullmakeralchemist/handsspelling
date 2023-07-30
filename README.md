@@ -165,41 +165,32 @@ Create a new virtual environment by running the following command in the termina
 ```
 python -m venv env
 ```
-After updating and upgrading we will write the following command:
+Then activate the enviroment:
+```
+env\Scripts\activate
+```
+The first step is getting our data set (Images folder). In this case I recommend having at least 200 images. While the more pictures you have, the better your model becomes but don’t use pictures nearly identicals. I’m using 4 different sign hand posture so taking 50 photos with any device can take a lot of time so let’s create an environment only for the script that will take photos with our web cam. In this environment we only need to install OpenCV. So run in your terminal:
 
 ```
-sudo pip3 install python-vlc
+pip install opencv-python
 ```
-
-To install the Mosquitto Broker enter these next commands:
-
-```
-pi@raspberry:~ $ sudo apt install -y mosquitto mosquitto-clients
-```
-
-You’ll have to type Y and press Enter to confirm the installation. To make Mosquitto auto start on boot up enter:
+Now you can run the following script, basically you can modify the labels, these labels will be used to create folders and will take the number of images that you declared. After finishing with the first label it will continue with the next one until it finishes the labels list. And will display a window that shows what is capturing. Also you can modify the time between each shot and time between the labels capture. Start taking pictures:
 
 ```
-pi@raspberry:~ $ sudo systemctl enable mosquitto.service
+link codigo
 ```
-```
-pi@raspberry:~ $  mosquitto -v
-```
-This returns the Mosquitto version that is currently running in your Raspberry Pi. It should be 1.5.X or above.
+At this point we will have the amount of images that we need but the name of each picture is random so we have to rename it to make it easier to identify each image. The next code will rename each image in just one folder so run the code for each folder in your project.
 
-<center>
-<img src="assets/mosquittov.png" width="60%">
-</center>
+link codigo
 
-#### Raspberry Pi IP Address & Paho Package
+#### Create a project with Roboflow
+Building a custom dataset can be a painful process. It might take dozens or even hundreds of hours to collect images, label them, and export them in the proper format. Fortunately, Roboflow makes this process straightforward. If you only have images, you can label them in [Roboflow Annotate](https://docs.roboflow.com/annotate?ref=blog.roboflow.com). (When starting from scratch, consider [annotating large batches of images via API](https://docs.roboflow.com/annotate/annotate-api?ref=blog.roboflow.com) or use the [model-assisted labeling](https://blog.roboflow.com/announcing-label-assist/) tool to speed things up.)
 
-To use Mosquitto broker later on your projects, you’ll need your Raspberry Pi IP address. To retrieve your Raspberry Pi IP address, type the next command in your Terminal window:
-```
-pi@raspberry:~ $ hostname -I
-```
-<center>
-<img src="assets/iprasp.png" width="60%">
-</center>
+Before you start, you need to create a Roboflow [account](https://app.roboflow.com/login?ref=blog.roboflow.com). Once you do that, you can create a new project in the Roboflow dashboard.
+
+<p align="center">
+<img src="media/1.png" width="60%">
+</p>
 
 The Paho package provides a client class which enables applications to connect to an MQTT broker to publish messages, and to subscribe to topics and receive published messages. In this project, the Python script is going to publish messages to the ESP8266 to turn the GPIOs on and off to control the lights.
 To install paho-mqtt run the following command:
