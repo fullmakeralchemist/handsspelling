@@ -217,16 +217,35 @@ After all images uploaded you can click Save and Continue.
 <img src="media/5.png" width="60%">
 </p>
 
-After the install process, you should see that esp8266 package is marked INSTALLED. Close the Boards Manager window once the install process has completed.
+Then it will appear the pop-up window and you can Click only in Assing Images, in this part if you are working with a Team you can invite them to add images or labeling.
 
-Setup ESP8266 Support When you've restarted, select Adafruit Feather HUZZAH ESP8266  from the Tools->Board dropdown.
+<p align="center">
+<img src="media/6.png" width="60%">
+</p>
+Then we need to click Start Annotating in case you upload images only to use the label tool from Roboflow.
 
-<center>
-<img src="assets/dropdown.png" width="60%">
-</center>
+<p align="center">
+<img src="media/7.png" width="60%">
+</p>
 
-#### Getting the MQTT library for the ESP8266
-For the ESP8266 to interact with the Raspberry Pi web server, you need to install the PubSubClient [library](https://github.com/knolleary/pubsubclient). This library provides a client for doing simple publish/subscribe messaging with a server that supports MQTT (basically allows your ESP8266 to talk with a Python web server).
+### Label your images
+Use the tool to select the element with the classes that you are going to use in your model. And repeat the same process for all the images.
+
+<p align="center">
+<img src="media/8.png" width="60%">
+</p>
+
+After you finish labeling all the images click the back button highlighted in red in the image below.
+
+<p align="center">
+<img src="media/9.png" width="60%">
+</p>
+
+Now we can add all the images to the Dataset with the button Add n Image to the Dataset.
+
+<p align="center">
+<img src="media/10.png" width="60%">
+</p>
 
 ##### Installing the Library
 1. [Click here to download the PubSubClient library](https://github.com/knolleary/pubsubclient/archive/master.zip). You should have a .zip folder in your Downloads folder
