@@ -101,23 +101,21 @@ With a lot of love 💖, motivation to help others 💪🏼 and [Python](https:/
 
 * [Roboflow](https://app.roboflow.com/)
 * [Google Colab](https://colab.research.google.com/) <img src="https://colab.research.google.com/img/favicon.ico" width="15"> (with its wonderful GPUs)
-* Model quantization with `tf.lite` for serving ⚙️
-* Encode the Model in an Arduino Header File
-* A [Raspberry Pi](https://www.raspberrypi.org/) 4 <img src="https://www.raspberrypi.org/homepage-9df4b/favicon.png" width="15">
-* A [Arduino Nano 33 BLE SENSE](https://store.arduino.cc/usa/nano-33-ble-sense)
-* A [NodeMCU ESP8266](https://nodemcu.readthedocs.io/en/release/) board
-* The MQTT [Mosquitto](https://mosquitto.org/) Broker
-* The [Eclipse Paho](http://eclipse.org/paho/) MQTT Python client [library](https://pypi.org/project/paho-mqtt/)
-* [PubSubClient library](https://github.com/knolleary/pubsubclient/archive/master.zip) in Arduino IDE for the ESP8266 Board
-* Arduino IDE
-* ESP8266 Board [Package](https://learn.adafruit.com/adafruit-feather-huzzah-esp8266/using-arduino-ide)
-* Any projector or display with HDMI connection 
+* Laptop with webcam
+* [Streamlit](https://streamlit.io/)
 
 
 <!-- GETTING STARTED -->
 ## Getting Started
 
-To get a local copy up and running follow these simple steps
+Object detection is a groundbreaking computer vision task that has a ton of applications across various industries. It goes beyond traditional image classification, where a model assigns a single label to an entire image, to identify and locate multiple objects within an image, often accompanied by bounding boxes outlining their positions.
+
+When working on custom models for object detection or other machine learning tasks, one of the challenges that researchers and developers may encounter is the lack of suitable databases or datasets. Overcoming these challenges often requires creativity and resourcefulness so this post will focus on how to create your custom database.
+
+<center>
+<img src="media/dog.png" width="60%">
+</center>
+
 
 ### Prerequisites
 
