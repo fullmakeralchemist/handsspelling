@@ -24,10 +24,10 @@
   <br />
   -->
 
-  <img src="https://img.shields.io/github/languages/top/fullmakeralchemist/tinyml-mapping-backlight?style=for-the-badge" alt="License" height="25">
-  <img src="https://img.shields.io/github/repo-size/fullmakeralchemist/tinyml-mapping-backlight?style=for-the-badge" alt="GitHub repo size" height="25">
-  <img src="https://img.shields.io/github/last-commit/fullmakeralchemist/tinyml-mapping-backlight?style=for-the-badge" alt="GitHub last commit" height="25">
-  <img src="https://img.shields.io/github/license/fullmakeralchemist/tinyml-mapping-backlight?style=for-the-badge" alt="License" height="25">
+  <img src="https://img.shields.io/github/languages/top/fullmakeralchemist//handsspelling?style=for-the-badge" alt="License" height="25">
+  <img src="https://img.shields.io/github/repo-size/fullmakeralchemist//handsspelling?style=for-the-badge" alt="GitHub repo size" height="25">
+  <img src="https://img.shields.io/github/last-commit/fullmakeralchemist//handsspelling?style=for-the-badge" alt="GitHub last commit" height="25">
+  <img src="https://img.shields.io/github/license/fullmakeralchemist//handsspelling?style=for-the-badge" alt="License" height="25">
   <a href="https://www.linkedin.com/in/padrondata/">
     <img src="https://img.shields.io/badge/-LinkedIn-black.svg?style=for-the-badge&logo=linkedin&colorB=555" alt="LinkedIn" height="25">
   </a>
@@ -80,7 +80,7 @@
 * [Challenges I ran into and What I learned](#challenges-i-ran-into-and-what-i-learned)
 * [Observations about the project](#observations-about-the-project)
 * [Accomplishments that I'm proud of](#accomplishments-that-im-proud-of)
-* [What's next Hands Spelling Recognition with Object detection](##whats-next-for-tiny-ml-in-mapping-dance-visual-arts-and-interactive-museums)
+* [What's next for Hands Spelling Recognition with Object detection](#whats-for-next-hands-spelling-recognition-with-object-detection)
 * [License](#license)
 * [Contact](#contact)
 
@@ -186,12 +186,10 @@ pip install opencv-python
 ```
 Now you can run the following script, basically you can modify the labels, these labels will be used to create folders and will take the number of images that you declared. After finishing with the first label it will continue with the next one until it finishes the labels list. And will display a window that shows what is capturing. Also you can modify the time between each shot and time between the labels capture. Start taking pictures:
 
-```
-link codigo
-```
+[Python Script to take pictures](https://github.com/fullmakeralchemist/handsspelling/blob/master/pythonscripts/img.py)
 At this point we will have the amount of images that we need but the name of each picture is random so we have to rename it to make it easier to identify each image. The next code will rename each image in just one folder so run the code for each folder in your project.
 
-link codigo
+[Python Script to rename images](https://github.com/fullmakeralchemist/handsspelling/blob/master/pythonscripts/renameimg.py)
 
 ### Create a project with Roboflow
 Building a custom dataset can be a painful process. It might take dozens or even hundreds of hours to collect images, label them, and export them in the proper format. Fortunately, Roboflow makes this process straightforward. If you only have images, you can label them in [Roboflow Annotate](https://docs.roboflow.com/annotate?ref=blog.roboflow.com). (When starting from scratch, consider [annotating large batches of images via API](https://docs.roboflow.com/annotate/annotate-api?ref=blog.roboflow.com) or use the [model-assisted labeling](https://blog.roboflow.com/announcing-label-assist/) tool to speed things up.)
@@ -498,7 +496,7 @@ Capturing images with the hands position could be hard doing more than 20 photos
 - Create a Live demo using Streamlit
 - Start creating a tool that will help others
 
-## What's for next Hands Spelling Recognition with Object detection
+## What's next for Hands Spelling Recognition with Object detection
 
 - Develop a hand posture reconcnition model with PoseNet and/or Mediapipe
 - Upload images and annotations from AWS or GCP or Azure to Roboflow.
