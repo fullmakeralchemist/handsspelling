@@ -14,9 +14,10 @@
    <h1>Hands Spelling Recognition with Object Detection</h1>
 
 <!-- PROJECT LOGO -->
-<!--
+
 <br />
 <p align="center">
+<!--
   <a href="https://github.com/fullmakeralchemist/tinyml-mapping-backlight">
     <img src="assets/logo.png" alt="Logo" width="720">
   </a>
@@ -48,10 +49,10 @@
     <img src="assets/TFChallengeWinners.png" alt="Logo" width="720">
   </a>
   </p>
+  -->
   <br />
 </p>
 <br />
--->
 
 <!-- TABLE OF CONTENTS -->
 ## Table of Contents
@@ -497,7 +498,7 @@ Capturing images with the hands position could be hard doing more than 20 photos
 - Create a Live demo using Streamlit
 - Start creating a tool that will help others
 
-## What's next Hands Spelling Recognition with Object detection
+## What's for next Hands Spelling Recognition with Object detection
 
 - Develop a hand posture reconcnition model with PoseNet and/or Mediapipe
 - Upload images and annotations from AWS or GCP or Azure to Roboflow.
