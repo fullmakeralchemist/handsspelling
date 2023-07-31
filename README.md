@@ -247,6 +247,42 @@ Now we can add all the images to the Dataset with the button Add n Image to the 
 <img src="media/10.png" width="60%">
 </p>
 
+Now will appear the option to Add Images you can choose different options I recommend using the default option.
+
+<p align="center">
+<img src="media/11.png" width="60%">
+</p>
+
+After loading our images to the database another window will appear. You need to make sure that there are no UNASSIGNED images and the Dataset is ready, once you have it similar as the image below you can Click Generate New Version.
+
+<p align="center">
+<img src="media/12.png" width="60%">
+</p>
+
+When we Generate a New Version we can use some tools to prepare the data and experiment with them. Go to option 3.
+
+<p align="center">
+<img src="media/13.png" width="60%">
+</p>
+
+In this option we can apply transformations in all the images, so make sure to configure this depending on your project. Maybe you are using a camera in Raspberry Pi or maybe you want to use images with a specific format. For my project this configuration is perfect.
+
+<p align="center">
+<img src="media/14.png" width="60%">
+</p>
+
+Option 4 is an amazing tool because you can generate extra versions from your images that can duplicate or triplicate in the free version of the dataset. Let’s see the options.
+
+<p align="center">
+<img src="media/15.png" width="60%">
+</p>
+
+For this project I’ll use flip horizontal, try to experiment with it, and depending on your project you can choose the options that you need.
+
+<p align="center">
+<img src="media/16.png" width="60%">
+</p>
+
 ##### Installing the Library
 1. [Click here to download the PubSubClient library](https://github.com/knolleary/pubsubclient/archive/master.zip). You should have a .zip folder in your Downloads folder
 2. Unzip the .zip folder and you should get pubsubclient-master folder
