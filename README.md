@@ -24,10 +24,10 @@
   <br />
   -->
 
-  <img src="https://img.shields.io/github/languages/top/fullmakeralchemist//handsspelling?style=for-the-badge" alt="License" height="25">
-  <img src="https://img.shields.io/github/repo-size/fullmakeralchemist//handsspelling?style=for-the-badge" alt="GitHub repo size" height="25">
-  <img src="https://img.shields.io/github/last-commit/fullmakeralchemist//handsspelling?style=for-the-badge" alt="GitHub last commit" height="25">
-  <img src="https://img.shields.io/github/license/fullmakeralchemist//handsspelling?style=for-the-badge" alt="License" height="25">
+  <img src="https://img.shields.io/github/languages/top/fullmakeralchemist/handsspelling?style=for-the-badge" alt="License" height="25">
+  <img src="https://img.shields.io/github/repo-size/fullmakeralchemist/handsspelling?style=for-the-badge" alt="GitHub repo size" height="25">
+  <img src="https://img.shields.io/github/last-commit/fullmakeralchemist/handsspelling?style=for-the-badge" alt="GitHub last commit" height="25">
+  <img src="https://img.shields.io/github/license/fullmakeralchemist/handsspelling?style=for-the-badge" alt="License" height="25">
   <a href="https://www.linkedin.com/in/padrondata/">
     <img src="https://img.shields.io/badge/-LinkedIn-black.svg?style=for-the-badge&logo=linkedin&colorB=555" alt="LinkedIn" height="25">
   </a>
@@ -332,7 +332,7 @@ In [Upload your images](#label-your-images) we finished the Versions tool from o
 <img src="media/21.png" width="60%">
 </p>
 
-A pop up copy the lines or save it we need the api_key to modify the notebook, will open a notebook in Google Colab after clicking Copy Snippet. Is a repository make sure to create a copy to save the changes first.
+A pop up copy the lines or save it we need the api_key to modify the notebook, will open a [notebook](https://github.com/fullmakeralchemist/handsspelling/tree/master/notebook) in Google Colab after clicking Copy Snippet. Is a repository make sure to create a copy to save the changes first.
 
 <p align="center">
 <img src="media/22.png" width="60%">
@@ -401,7 +401,7 @@ We will also visualize the output of the model with the identified objects highl
 
 In [Deploy model on Roboflow](#deploy-model-on-roboflow) of this series, we have discussed how to download a pre-trained weight file of the Yolov8 model. downloaded the best.pt file and saved it inside our weights directory. We will use the same weight file. In the created file with the name app.pywrite the following lines of code:
 
-link codigo
+[Streamlit Script](https://github.com/fullmakeralchemist/handsspelling/blob/master/streamlitscript/app.py)
 
 You can modify the app text in the st.caption line codes as you prefer for your project now let’s run the app with in the terminal:
 
@@ -447,7 +447,7 @@ From here we are ready to go to [Streamlit.io](https://share.streamlit.io/) and 
 <img src="media/28.png" width="60%">
 </p>
 
-Connect the Streamlit account with Github and then select the repository where your app is located. then select the branch and change the Main file path:
+Connect the Streamlit account with Github and then select the [repository](https://github.com/fullmakeralchemist/handsspelling/tree/master/streamlitscript) where your app is located. then select the branch and change the Main file path:
 
 <p align="center">
 <img src="media/29.png" width="60%">
