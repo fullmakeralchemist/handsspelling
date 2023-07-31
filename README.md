@@ -74,11 +74,12 @@
   * [Upload your images](#upload-your-images)
 * [Train YOLOv8 on a custom dataset](#train-yolov8-on-a-custom-dataset)
   * [Deploy model on Roboflow](#deploy-model-on-roboflow)
-  * [Built With](#built-with)
+* [Creating a Streamlit WebApp for Image Object Detection with a Roboflow model](#creating-a-streamlit-webapp-for-image-object-detection-with-a-roboflow-model)
+  * [Create a Uploading an Image On Streamlit WebApp](#create-a-uploading-an-image-on-streamlit-webapp)
 * [Challenges I ran into and What I learned](#challenges-i-ran-into-and-what-i-learned)
 * [Observations about the project](#observations-about-the-project)
 * [Accomplishments that I'm proud of](#accomplishments-that-im-proud-of)
-* [What's next for Tiny ML in Mapping Dance, Visual Arts and interactive museums](##whats-next-for-tiny-ml-in-mapping-dance-visual-arts-and-interactive-museums)
+* [What's next Hands Spelling Recognition with Object detection](##whats-next-for-tiny-ml-in-mapping-dance-visual-arts-and-interactive-museums)
 * [License](#license)
 * [Contact](#contact)
 
@@ -496,7 +497,7 @@ Capturing images with the hands position could be hard doing more than 20 photos
 - Create a Live demo using Streamlit
 - Start creating a tool that will help others
 
-## What's Hands Spelling Recognition with Object detection
+## What's next Hands Spelling Recognition with Object detection
 
 - Develop a hand posture reconcnition model with PoseNet and/or Mediapipe
 - Upload images and annotations from AWS or GCP or Azure to Roboflow.
@@ -509,4 +510,4 @@ Capturing images with the hands position could be hard doing more than 20 photos
 <!-- CONTACT -->
 ## Contact
 
-Eduardo Padron - [@makeralchemist](https://www.linkedin.com/in/padrondata/)
+Eduardo Padron - [LinkedIn: @padrondata](https://www.linkedin.com/in/padrondata/)
