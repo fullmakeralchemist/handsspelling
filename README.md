@@ -391,20 +391,87 @@ We’ll use Streamlit to allow users to upload an image. After successfully uplo
 
 We will also visualize the output of the model with the identified objects highlighted in the image. Let’s go into the code.
 
-In Part 2 of this series, we have discussed how to download a pre-trained weight file of the Yolov8 model. downloaded the best.pt file and saved it inside our weights directory. We will use the same weight file. In the created file with the name app.pywrite the following lines of code:
+In [Deploy model on Roboflow](#deploy-model-on-roboflow) of this series, we have discussed how to download a pre-trained weight file of the Yolov8 model. downloaded the best.pt file and saved it inside our weights directory. We will use the same weight file. In the created file with the name app.pywrite the following lines of code:
 
+link codigo
 
+You can modify the app text in the st.caption line codes as you prefer for your project now let’s run the app with in the terminal:
 
+```
+streamlit run app.py
+```
+
+This will deploy our app in the web browser that we are currently using, upload an image an check that identifies the objects:
+
+<p align="center">
+<img src="media/26.png" width="60%">
+</p>
+
+If everything run properly please run the next command to get the requirements:
+
+```
+pip freeze > requirements.txt
+```
+
+Also we need to create a file called packages.txt in the code folder that and put this line in it:
+
+```
+libgl1
+```
+
+Now we can create a repo in Github to put our app in the streamlit.io but before that make sure erase everything in the requierements except for 3 things:
+
+```
+torch==2.0.1
+ultralytics==8.0.142
+streamlit==1.25.0
+```
+
+The [Streamlit.io](https://share.streamlit.io/) only allows uploading 1GB. The installations use the most of the space, so to avoid that we leave the three mandatory libraries for our app. Check this repository the folder [Code]() and how it needs to uploaded.
+
+<p align="center">
+<img src="media/27.png" width="60%">
+</p>
+
+From here we are ready to go to [Streamlit.io](https://share.streamlit.io/) and deploy our app. Create an account and then will appear the next window click in the New app.
+
+<p align="center">
+<img src="media/28.png" width="60%">
+</p>
+
+Connect the Streamlit account with Github and then select the repository where your app is located. then select the branch and change the Main file path:
+
+<p align="center">
+<img src="media/29.png" width="60%">
+</p>
+
+Now select the Python version and save the changes after this we can click the deploy button.
+
+<p align="center">
+<img src="media/30.png" width="60%">
+</p>
+
+Then will appear the next window showing all the installations. Check if there are errors.
+
+<p align="center">
+<img src="media/31.png" width="60%">
+</p>
+
+Then you can try your app and check if it works properly.
+
+<p align="center">
+<img src="media/32.png" width="60%">
+</p>
+
+The combination of Roboflow and Streamlit enables the development of applications with a user-friendly interface. This approach makes it easier to detect and track objects in real time, allowing for a wide range of use cases not only for Object detection models for other data science and ML projects.
 
 ## Challenges I ran into and What I learned
 
-One of the main challenges was to create a model in Tensorflow without having much knowledge about Machine Learning, my major area of studies is hydrology, and irrigation. That's why I got the Tiny ML book from Pete Warden and Daniel Situnayake and then I found the Tiny Ml Workshop resource may result in the most suitable code resource to tackle this area of necessity. 
+One of the main challenges was to label with labelimg I didn't found a way to install it using conda in Windows also the same in a virtual envioroment. After doing research I found how to download it in binary. 
 
-The second main challenge (once I learned about creating the model on Arduino) was to create bluetooth connections without having much knowledge about the BLE library, I used before for other irrigation projects WiFi connection using Firebase real-time database and MQTT. This is why I found that Mosquitto and Paho on Raspberry Pi may result in the most suitable technologies to tackle wireless connection, so it could get control in real-time. 
+The second main challenge was to run the Streamlit app in the Share hub, I have problems with the Pytorch version the one I install in my computer was not compatible with the platform and then it was missing the packages.txt. 
 
-Finally, this is the first time I use a trained model using tflite on an Arduino with Raspberry Pi. In the end, I learned that whenever you may think that you found no way out, the motivation may help you to find alternative solutions with new technologies.
-
-**About the Bluetooth attempt here is the script and the sketch to get data through a [bluetooth connection](https://github.com/fullmakeralchemist/tinyml-mapping-backlight/tree/master/Bluetooth_attempt) follow the instructions**
+Finally, this is the first time I use Roboflow and Streamlit. In the end, I learned that whenever you may think that you found no way out, the motivation may help you to find alternative solutions with this resources.
 
 ## Observations about the project
 
