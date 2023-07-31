@@ -318,99 +318,83 @@ Once you have a labeled dataset, and you have made your augmentations, it is tim
 
 As with labeling, you can take two approaches to training and inferring with object detection models train and deploy yourself, or use training and inference services like Roboflow Train and Roboflow Deploy. Both of which are free for Public plans.
 
-In [Upload your images]() we finished the Versions tool from our Roboflow project now is time to train the model. We have to choose the option Custom Train using YOLOv5 and then Get Snippet.
+In [Upload your images](#label-your-images) we finished the Versions tool from our Roboflow project now is time to train the model. We have to choose the option Custom Train using YOLOv5 and then Get Snippet.
 
 <p align="center">
 <img src="media/21.png" width="60%">
 </p>
 
-### Run the script
+A pop up copy the lines or save it we need the api_key to modify the notebook, will open a notebook in Google Colab after clicking Copy Snippet. Is a repository make sure to create a copy to save the changes first.
+
+<p align="center">
+<img src="media/22.png" width="60%">
+</p>
+
+When you open the notebook it is necessary to run all to set up the Colab session. There are a few cells that you can avoid but check it first.
+
+<p align="center">
+<img src="media/23.png" width="60%">
+</p>
+
+If we remember we have the api_key and extra information about our data set we will use it in the Step 5: Exporting dataset from the Notebook we will find a code cell and we need to replace with the copied lines from Roboflow after that we can run everything without modifying anything else.
+
+<p align="center">
+<img src="media/24.png" width="60%">
+</p>
 
 
-Clone the tinyml-mapping-backlight repo, download it or just copy and paste from the files from this repo:
-bash
-```
-git clone https://github.com/fullmakeralchemist/tinyml-mapping-backlight
-```
+### Deploy model on Roboflow
+Once you have finished training the YOLOv8 model, you’ll have a set of trained weights ready for use. These weights will be in the /runs/detect/train/weights/best.pt folder of your project. You need to download the filebest.pt to use it in the Streamlit app.
 
-The simplest way is just using the Thonny IDE which is included with Raspberry Pi OS, Thonny comes with Python 3.6 built in, so you don’t need to install anything. Just open up the program, which you’ll find under Menu > Programming. It offers a lot of advanced features not currently available in the Python 3 (IDLE) program. Also you can follow my guide to install Visual Studio Code, but some libraries show some errors trying to run the script. So I recommend you to use the Thonny IDE.
-
-<center>
-<img src="assets/run.png" width="60%">
-</center>
+<p align="center">
+<img src="media/25.png" width="60%">
+</p>
 
 <!-- USAGE EXAMPLES -->
-## Usage
+## Creating a Streamlit WebApp for Image Object Detection with a Roboflow model
+Streamlitis an open-source app framework for Machine Learning and Data Science teams. Create beautiful web apps in minutes. Streamlit apps are Python scripts that run from top to bottom. Every time a user opens a browser tab pointing to your app, the script is re-executed. As the script executes, Streamlit draws its output live in a browser.
 
-### Data Exploration
+[Create an app](https://docs.streamlit.io/library/get-started/create-an-app) using Streamlit’s core features to fetch and cache data, draw charts, plot information on a map, and use interactive widgets, like a slider, to filter results.
 
-The dataset used for this project was obtained from the capture_acc_gyro file, you can find it in the [Repository](https://github.com/fullmakeralchemist/tinyml-mapping-backlight/tree/master/Arduino_Sketches/capture_acc_gyro). This dataset records 119 x,y and z acceleration and gyroscope data from on-board IMU and prints it to the Serial Monitor for one second when the significant motion is detected and prints the data in CSV format. This data will be copied and pasted into a text file and this text fill will be saved as a CSV file. To be uploaded to the Google Collab [Notebook](https://github.com/fullmakeralchemist/tinyml-mapping-backlight/blob/master/notebook/tinyml_Gesture.ipynb) to train.
-<center>
-<img src="assets/5.png" width="60%">
-</center>
+Let’s prepare the virtual environment for the Streamlit app. First let’s create a virtual environment and once created then activate it (Windows).
 
-### Model Training
+```
+python -m venv env
+env\Scripts\activate
+```
 
-After reading Tiny ML Machine Learning with TensorFlow Lite on Arduino and Ultra-Low-Power Microcontrollers, I found this [resource](https://github.com/arduino/ArduinoTensorFlowLiteTutorials/) that helped me a lot to just focus on making some tests with different movements, training and testing with the Arduino board.
+Then we have to install PyTorch, Ultralytics and Streamlit. Try to install in the next order.
 
-<center>
-<img src="assets/4.png" width="60%">
-</center>
+```
+pip install torch
+pip install ultralytics
+pip install streamlit
+```
 
-As part of the project development I have implemented the proposed model using Tensorflow 2.0. For training I used the previously mentioned CSV files obtained from Arduino on a Google Colab environment using GPUs. So far the model was trained for 600 epochs using a batch size of 64. The training history can be seen in the following graphs:
+After this we are ready to try the hello world in Streamlit to check that everything is installed correctly. Create a file called app.py and put the next code lines using your favorite IDE:
 
-<center>
-<img src="assets/6.png" width="60%">
-</center>
+```
+import streamlit as st
+st.write("Hello, World!")
+```
 
-Although the results may not seem quite good, the model has achieved an accuracy value of 0.9149 on the validation dataset with 600 training epochs, with a record of at least 20 repeats of the movement recorded with the arduino capture file, also I try with 30 and 40 reparts, with more repetitions of the movement gets a better result, the problem is it gets tired repeat a movement so many times. We can get a general idea of the model performance in the arduino [TinyIMU file](https://github.com/fullmakeralchemist/tinyml-mapping-backlight/tree/master/Arduino_Sketches) running the model printing the **line data.f[i] in the loop through the output tensor values from the model**.
+Then run it from the terminal in cmd and if everything works fine will open the browser.
 
-The trained model architecture, quantized model with tflite and encoded the Model in an Arduino Header File(for the deployment in the Arduino board) can be found in the model folder. Finally, if you want to re-train the model and verify the results on your own, you have to upload the csv files found in this [folder](https://github.com/fullmakeralchemist/tinyml-mapping-backlight/tree/master/CSV_Files).
+```
+streamlit run app.py
+```
 
-### Mapping and lightning Script Running
+Then to create a tool to upload our pictures and use the model we need to open the code editor and let’s get started by replacing the previous file and creating a new one named app.py. But we also need a folder called weights and for the moment is everything. Now let’s go to the next step.
 
-<center>
-<img src="assets/Mapping_Dance_Hero.gif" width="60%">
-</center>
+## Create a Uploading an Image On Streamlit WebApp
+We’ll use Streamlit to allow users to upload an image. After successfully uploading an image, is ready to run object detection on the uploaded image using YOLOv8. This step involves loading the YOLOv8 model and passing the uploaded image through the model to identify the objects present in the image.
 
-The script is the base of interaction for the player of mapping and lightning during the movements made. 
-The script has been entirely developed with Python on top of a VLC and MQTT integration, for a more intuitive and synchronous interaction. The script serves a real-time player, and lightning activation is served through the trained model that is deployed on the Arduino Nano 33 BLE Sense, which sends the data by serial connection to a ESP8266 board wireless using the MQTT broker. The script has to be changed on the line using the IP from the Raspberry to access the remote control of the lights and if the media is differente will have to be changed the path and the file name. I added the media that I used for this project on this [link](https://drive.google.com/drive/folders/1uIEMpqL8vLfNuTHD6CSaq_Hc-jH8DiS8?usp=sharing).
+We will also visualize the output of the model with the identified objects highlighted in the image. Let’s go into the code.
 
-<center>
-<img src="assets/7.png" width="60%">
-</center>
+In Part 2 of this series, we have discussed how to download a pre-trained weight file of the Yolov8 model. downloaded the best.pt file and saved it inside our weights directory. We will use the same weight file. In the created file with the name app.pywrite the following lines of code:
 
-### Perform the Model
 
-The following image illustrates a general idea of the model working with the Raspberry Pi and the ESP8266 :
 
-<center>
-<img src="assets/8.png" width="60%">
-</center>
-
-Once that model has been trained, saved, quantized, encoded in an Arduino Header File to use in an Arduino Nano 33 BLE Sense and downloaded, the model has been ported into a TinyIMU Ino file. The Arduino connects directly to the Raspberry, then the lights mqtt ino file is uploaded to the ESP8266 board. We can run the script to run the animation on the projector and activate the lights as the deployed model predicts ([Raspberry Pi Script](https://github.com/fullmakeralchemist/tinyml-mapping-backlight/tree/master/Raspberry_Script) **Beforre runing the script make sure that the path on the script condition is right**).
-
-The script that serves as the interface between the Raspberry Pi, Arduino and the ESP8266 BOARD is capable of printing the state of the VLC player as well as the MQTT connection don’t need the internet connection, just connected to the same router that is connected the ESP8266 board and the Arduno also can works on a hotspot in a smartphone. In general, the script takes only ~14% of the Raspberry Pi CPU it could be more if there are a lot of VLC windows open so I add a condition related to the state of the player so when the animation is over the player is closed to reduce the CPU use to avoid unnecessary CPU usage.
-
-## Kinetic Sculpture
-
-The kinetic sculpture is a concept. A small servo motor controls the movement in the sculpture. This could be added to the performance as a “dance partner” expanding the possibilities of creativity for the artist with this kind of elements, also in a museum maybe adding in a planetarium to start a cinematic with planet movements as an example of this automation applications with Tiny ML. Here are some examples of motors that could be integrated.
-
-<center>
-<img src="assets/servogi.gif" width="60%">
-</center>
-
-<center>
-<img src="assets/rbgservo.gif" width="60%">
-</center>
-
-<center>
-<img src="assets/bugs.gif" width="60%">
-</center>
-
-<center>
-<img src="assets/arm.gif" width="60%">
-</center>
 
 ## Challenges I ran into and What I learned
 
