@@ -11,7 +11,7 @@
 -->
 
 <!--#     The TensorFlow Microcontroller Challenge    -->
-   <h1>Hands Spelling Recognition with Object detection</h1>
+   <h1>Hands Spelling Recognition with Object Detection</h1>
 
 <!-- PROJECT LOGO -->
 <!--
@@ -27,13 +27,14 @@
   <img src="https://img.shields.io/github/repo-size/fullmakeralchemist/tinyml-mapping-backlight?style=for-the-badge" alt="GitHub repo size" height="25">
   <img src="https://img.shields.io/github/last-commit/fullmakeralchemist/tinyml-mapping-backlight?style=for-the-badge" alt="GitHub last commit" height="25">
   <img src="https://img.shields.io/github/license/fullmakeralchemist/tinyml-mapping-backlight?style=for-the-badge" alt="License" height="25">
-
-  <a href="https://www.linkedin.com/in/fullmakeralchemist/">
+  <a href="https://www.linkedin.com/in/padrondata/">
     <img src="https://img.shields.io/badge/-LinkedIn-black.svg?style=for-the-badge&logo=linkedin&colorB=555" alt="LinkedIn" height="25">
   </a>
+  <!--
   <a href="https://twitter.com/makeralchemist/">
     <img src="https://img.shields.io/twitter/follow/makeralchemist?label=Twitter&logo=twitter&style=for-the-badge" alt="Twitter" height="25">
   </a>
+  -->
   <!--
    <h3 align="center">Tiny ML in Mapping Dance, Visual Arts and interactive museums</h3>
   <p align="center">
@@ -61,12 +62,19 @@
 * [Getting Started](#getting-started)
   * [Prerequisites](#prerequisites)
   * [Installation](#installation)
-* [Usage](#usage)
-  * [Data Exploration](#data-exploration)
-  * [Model Training](#model-training)
-  * [Mapping and lightning Script Running](#mapping-and-lightning-script-running)
-  * [Perform the Model](#perform-the-model)
-* [Kinetic Sculpture](#kinetic-sculpture)
+* [Part 1: Introduction and Setup for Roboflow](#part-1-introduction-and-setup-for-roboflow)
+  * [Demo of the Object Detection App](#demo-of-the-object-detection-app)
+  * [Object Detection](#object-detection)
+  * [What is YOLOv8?](#what-is-yolov8)
+  * [Why Should I Use YOLOv8?](#why-should-i-use-yolov8)
+  * [Why Streamlit is a Good Choice for Building a ML App](#why-streamlit-is-a-good-choice-for-building-a-ml-app)
+  * [Project Setup: Installing Dependencies and Creating Required Files and Directories](#project-setup-installing-dependencies-and-creating-required-files-and-directories)
+  * [Creating Virtual Environment](#creating-virtual-environment)
+  * [Create a project with Roboflow](#create-a-project-with-roboflow)
+  * [Upload your images](#upload-your-images)
+* [Train YOLOv8 on a custom dataset](#train-yolov8-on-a-custom-dataset)
+  * [Deploy model on Roboflow](#deploy-model-on-roboflow)
+  * [Built With](#built-with)
 * [Challenges I ran into and What I learned](#challenges-i-ran-into-and-what-i-learned)
 * [Observations about the project](#observations-about-the-project)
 * [Accomplishments that I'm proud of](#accomplishments-that-im-proud-of)
@@ -488,7 +496,7 @@ Capturing images with the hands position could be hard doing more than 20 photos
 - Create a Live demo using Streamlit
 - Start creating a tool that will help others
 
-## What's next for Tiny ML in Mapping Dance, Visual Arts and interactive museums
+## What's Hands Spelling Recognition with Object detection
 
 - Develop a hand posture reconcnition model with PoseNet and/or Mediapipe
 - Upload images and annotations from AWS or GCP or Azure to Roboflow.
