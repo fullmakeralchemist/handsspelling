@@ -467,39 +467,33 @@ The combination of Roboflow and Streamlit enables the development of application
 
 ## Challenges I ran into and What I learned
 
-One of the main challenges was to label with labelimg I didn't found a way to install it using conda in Windows also the same in a virtual envioroment. After doing research I found how to download it in binary. 
+One of the main challenges was to label with labelimg I didn't found a way to install it using Conda in Windows also the same in a virtual environment. After doing research I found how to download it in binary. 
 
-The second main challenge was to run the Streamlit app in the Share hub, I have problems with the Pytorch version the one I install in my computer was not compatible with the platform and then it was missing the packages.txt. 
+The second main challenge was to run the Streamlit app in the Share hub, I have problems with the Pytorch version. The one I installed on my computer was not compatible with the platform and then it was missing the packages.txt. 
 
-Finally, this is the first time I use Roboflow and Streamlit. In the end, I learned that whenever you may think that you found no way out, the motivation may help you to find alternative solutions with this resources.
+Finally, this is the first time I use Roboflow and Streamlit. In the end, I learned that whenever you may think that you found no way out, the motivation may help you to find alternative solutions with these resources.
 
 ## Observations about the project
 
-The Bluetooth connection has a limited number of devices to connect on the Raspberry Pi, it only allows 7 devices using bluetooth. In windows is 10 devices so with a lot of dancers it will be difficult using bluetooth. 
+The Share Streamlit Hub has only 1GB of memory to run apps so I need to be careful with what I deploy and also I try to run it in Heroku but it only gives me 500MB of memory so I couldn't run the app in Heroku. The images data set is hard to create because it is necessary to have images different from each other but with a webcam it is hard to get a variety of hands position. Also if hands position are similar can confuse some things. For this I would like to try PoseNet or MediaPipe to compare both.
 
-Training the moves could be hard doing more than 20 repetitions of a movement, also I realize recording the moves, that is necessary to be really precise doing the movements, the difference in each repetition affects the model precision. 
+Capturing images with the hands position could be hard doing more than 20 photos of a hand gesture. 
 
 ## Accomplishments that I'm proud of
 
-- Building a custom script to just change a few variables
-- Sending data using the BLE library to my laptop using Python
-- Sending messages to a ESP8266 board using MQTT
+- Building a custom script to capture images and just change a few variables for each project
+- Create a images data set
+- Have a model with an accuracy of >90 %
 - Learning new technologies in a record time
+- Create a Live demo using Streamlit
 - Start creating a tool that will help others
 
 ## What's next for Tiny ML in Mapping Dance, Visual Arts and interactive museums
 
-- Develop own embedded device for the model deployment (which should already include a accelerometer, gyroscope and a wifi connection)
-- Improve user data acquisition through the accelerometer and gyroscope.
-- Add Bluetooth recording of accelerometer and gyroscope (you can find a file using python as a receiver of the information and the INO file that sends the data through the BLE library).
-- Implement in a dance presentation or a museum (also in my house in holidays)
-- Add kinetic sculptures with servo motors to add an effect like the matilda movie.
-- Test prototype with a dancer.
-- Add the MadMapper API to add more visual effects with the animations.
-
-<center>
-<img src="assets/matilda.gif" width="60%">
-</center>
+- Develop a hand posture reconcnition model with PoseNet and/or Mediapipe
+- Upload images and annotations from AWS or GCP or Azure to Roboflow.
+- Deploy Model in Raspberry Pi.
+- Upload images from Raspberry Pi
 
 ## License
 
@@ -507,15 +501,4 @@ Training the moves could be hard doing more than 20 repetitions of a movement, a
 <!-- CONTACT -->
 ## Contact
 
-Eduardo Padron - [@makeralchemist](https://twitter.com/makeralchemist) - 
-
-Project Link: [https://github.com/fullmakeralchemist/tinyml-mapping-backlight](https://github.com/fullmakeralchemist/tinyml-mapping-backlight)
-
-IF YOU THINK THAT YOU CAN HELP ME TO HELP OTHERS, PLEASE DO NOT HESITATE TO CONTACT ME.
-
-<!-- ACKNOWLEDGEMENTS -->
-## Acknowledgements
-
-* Icons made by [Flat Icons](https://www.flaticon.com/authors/flat-icons) from [www.flaticon.com](https://www.flaticon.com/)
-* Images and gifs made by [Canva](https://www.canva.com/) 
-* Thanks to the Tensorflow team Arduino and Raspberry Pi for developing such an incredible technology
+Eduardo Padron - [@makeralchemist](https://www.linkedin.com/in/padrondata/)
