@@ -283,16 +283,46 @@ For this project I’ll use flip horizontal, try to experiment with it, and depe
 <img src="media/16.png" width="60%">
 </p>
 
-##### Installing the Library
-1. [Click here to download the PubSubClient library](https://github.com/knolleary/pubsubclient/archive/master.zip). You should have a .zip folder in your Downloads folder
-2. Unzip the .zip folder and you should get pubsubclient-master folder
-3. Rename your folder from pubsubclient-master to pubsubclient
-4. Move the pubsubclient folder to your Arduino IDE installation libraries folder
-5. Then, re-open your Arduino IDE
+After you choose an Augmentation you will see extra options. For my project I only need the Horizontal. Try to check what is best for your custom project. After that click Apply
 
-The library comes with a number of example sketches. See File > Examples > PubSubClient within the Arduino IDE software.
+<p align="center">
+<img src="media/17.png" width="60%">
+</p>
 
-Finally, you can upload the full [sketch](https://github.com/fullmakeralchemist/tinyml-mapping-backlight/tree/master/ESP8266_Sketches/lightsmqtt) to your ESP8266 (replace with your SSID, password and RPi IP address **see the comments in the sketch**):
+Then click continue to step 5 and last.
+
+<p align="center">
+<img src="media/18.png" width="60%">
+</p>
+
+Select the Maximun Version and then click Generate and is ready to go.
+
+<p align="center">
+<img src="media/19.png" width="60%">
+</p>
+
+After this will appear the next page:
+
+<p align="center">
+<img src="media/20.png" width="60%">
+</p>
+
+Congratulations now you have an Image Dataset ready to train a model.
+
+## Train YOLOv8 on a custom dataset
+In this section, we will dive deeper into the YOLOv8 object detection model and explore how to train it .
+
+There are a wide range of open-source object detection models available. A popular choice is models in the YOLO (You Only Look Once) family, which continue to represent the state-of-the-art in object detection tasks.
+
+Once you have a labeled dataset, and you have made your augmentations, it is time to start training an object detection model. Training involves showing instances of your labeled data to a model in batches and iteratively improving the way the model is mapping images to predictions.
+
+As with labeling, you can take two approaches to training and inferring with object detection models train and deploy yourself, or use training and inference services like Roboflow Train and Roboflow Deploy. Both of which are free for Public plans.
+
+In [Upload your images]() we finished the Versions tool from our Roboflow project now is time to train the model. We have to choose the option Custom Train using YOLOv5 and then Get Snippet.
+
+<p align="center">
+<img src="media/21.png" width="60%">
+</p>
 
 ### Run the script
 
