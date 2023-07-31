@@ -80,7 +80,7 @@
 * [Challenges I ran into and What I learned](#challenges-i-ran-into-and-what-i-learned)
 * [Observations about the project](#observations-about-the-project)
 * [Accomplishments that I'm proud of](#accomplishments-that-im-proud-of)
-* [What's next for Hands Spelling Recognition with Object detection](#whats-for-next-hands-spelling-recognition-with-object-detection)
+* [What's next for Hands Spelling Recognition with Object detection](#whats-next-for-hands-spelling-recognition-with-object-detection)
 * [License](#license)
 * [Contact](#contact)
 
