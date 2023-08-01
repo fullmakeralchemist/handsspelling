@@ -502,6 +502,7 @@ Capturing images with the hands position could be hard doing more than 20 photos
 - Upload images and annotations from AWS or GCP or Azure to Roboflow.
 - Deploy Model in Raspberry Pi.
 - Upload images from Raspberry Pi
+- Add web cam and video object detection
 
 ## License
 
