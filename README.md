@@ -473,6 +473,384 @@ Then you can try your app and check if it works properly.
 
 The combination of Roboflow and Streamlit enables the development of applications with a user-friendly interface. This approach makes it easier to detect and track objects in real time, allowing for a wide range of use cases not only for Object detection models for other data science and ML projects.
 
+## Enhancing Active Learning: Uploading Data to Roboflow from Windows or Google Colab using the API 
+
+Active learning aims to select the most informative samples from a large pool of unlabeled data to be labeled by usually a human annotator to improve the model’s performance.
+
+In the context of Windows, active learning in this project will be collecting data and uploading this new data in Roboflow to increase model performance. It can be particularly useful when working with small datasets, which is common to improve models.
+
+To Achieve this I’ll use Roboflow API to upload images to our existing dataset on the Roboflow platform. You can upload images to Roboflow projects using the web interface, Python SDK, REST API, and CLI.
+
+First we have to have create our Notebook in Google Colab or create a Virtual envioroment in Conda or venv. If you are using Windows check this first. If you are using Colab jump this step. and go to the code.
+
+```
+python -m venv env
+env\Scripts\activate
+```
+
+Then we can install notebook to open the notebooks.
+
+```
+pip install notebook
+```
+To set up our noteook we have to run the next commands:
+```
+import os
+HOME = os.getcwd()
+print(HOME)
+```
+```
+!pip install ultralytics==8.0.20
+
+from IPython import display
+display.clear_output()
+
+import ultralytics
+ultralytics.checks()
+
+from ultralytics import YOLO
+
+from IPython.display import display, Image
+```
+```
+!mkdir {HOME}/datasets
+%cd {HOME}/datasets
+
+!pip install roboflow --quiet
+```
+
+After this our notebook is ready to run the scrip. Before diving in to the code I need to remember that we need new data to upload. So make sure you have run the code from Part 1.
+
+After that we now have a new data set that now we can upload our data to Roboflow using the API.
+
+### Upload images to Roboflow using the API and Python.
+
+First we need to check if we run the pip install roboflow. Then we need to run in the terminal. If we had success installing the library, create a new cell add the code below and click Run with the next code to ulpload the images in the folder you create recently (Just change the corresponding values of your project). The next code is to just upload one image and test:
+
+```
+from roboflow import Roboflow
+
+# Initialize the Roboflow object with your API key
+rf = Roboflow(api_key="xxxxxxxxxxxxxxxxxxxx")
+
+# Retrieve your current workspace and project name
+print(rf.workspace())
+
+# Specify the project for upload
+project = rf.workspace("xxxxxxxxxx").project("xxxxxxxx")
+
+# Upload the image to your project
+project.upload("/content/two.jpg")
+
+```
+To upload a entire folder use the next code:
+
+```
+import os
+from roboflow import Roboflow
+
+# Initialize the Roboflow object with your API key
+rf = Roboflow(api_key="xxxxxxxxxxxxxxxxxxxx")
+
+# Retrieve your current workspace and project name
+print(rf.workspace())
+
+# Specify the project for upload
+project = rf.workspace("xxxxxxxxs").project("xxxxxxxxx")
+
+# Folder path containing all the images
+folder_path = "/content/images"  # Update this to your folder path
+
+# Get a list of all image files in the folder
+image_files = [os.path.join(folder_path, file) for file in os.listdir(folder_path) if file.lower().endswith(('.jpg', '.jpeg', '.png'))]
+
+# Upload each image to your project
+for image_file in image_files:
+    project.upload(image_file)
+
+```
+In the Shell will appear all the information and if is running add some print to warning you when it’s over. When is running you will see that it takes a while, but the images will be uploaded.
+
+<p align="center">
+<img src="media/33.png" width="60%">
+</p>
+
+After it finishes you can wait a few minutes to see the images in the assign section from your Rboflow project as we see in the image below.
+
+<p align="center">
+<img src="media/34.png" width="60%">
+</p>
+
+Now we have a new data set of images to label manually and then retrain your model! By harnessing the potential of Active Learning with Windows or Google Colab and Roboflow API, you’ve created a streamlined process for capturing images and utilizing the Roboflow label them seamlessly. So, time to go ahead, dive into the labeling process, and let the possibilities of Active Learning and Roboflow API propel your machine learning journey forward.
+
+## Enhancing Active Learning: Uploading Data to Roboflow from Raspberry Pi using the API
+
+In the context of Raspberry Pi, active learning in this project will be collecting data and uploading this new data in Roboflow to increase model performance. It can be particularly useful when working with small datasets, which is common in embedded systems like the Raspberry Pi, where storage and computational resources may be limited.
+
+To Achieve this I’ll use Roboflow API to upload images to our existing dataset on the Roboflow platform. You can upload images to Roboflow projects using the web interface, Python SDK, REST API, and CLI.
+
+First we have to have set up our Raspberry Pi check my tutorial post [how to set up a Raspberry Pi](https://medium.com/geekculture/setting-up-your-raspberry-pi-4-wireless-f51c16937d1e). To collect data I’m using Buster version of Raspberry Pi OS, then we have to set up the camera, if you are using an official camera from Raspberry Pi check my tutorial [how to set up the camera with the OS version](https://medium.com/geekculture/camera-setup-on-raspberry-pi-4-912e7d415cdf) that I mentioned.
+
+Once we have everything ready the first thing we need is create a Python code to automate as we did in Windows how to take photos, the code will create a folder with the name of the labels list we want, and for each folder will captures images with the camera the times we asked and as we did in Windows will appear a windows showing us what the camera see, let’s see the code:
+
+```
+import time
+import picamera
+from PIL import Image
+import os
+
+def get_image_size(image_path):
+    with Image.open(image_path) as img:
+        return img.size
+
+def take_pictures(label, num_pictures, interval_seconds, output_folder):
+    folder_path = os.path.join(output_folder, label)
+    if not os.path.exists(folder_path):
+        os.makedirs(folder_path)
+
+    with picamera.PiCamera() as camera:
+        # Start the preview
+        camera.start_preview()
+
+        for i in range(1, num_pictures + 1):
+            # Generate the file name for the picture
+            file_name = os.path.join(folder_path, f"{label}_picture{i}.jpg")
+
+            # Capture the picture
+            camera.capture(file_name)
+
+            # Get the size of the captured image
+            image_size = get_image_size(file_name)
+            print(f"{label} - Picture {i}: Width={image_size[0]}, Height={image_size[1]}")
+
+            # Wait for the specified interval before taking the next picture
+            time.sleep(interval_seconds)
+
+        # Stop the preview after capturing all pictures
+        camera.stop_preview()
+
+if __name__ == "__main__":
+    labels = ["label1", "label2", "label3"]  # Add more labels if needed
+    num_pictures_per_label = 20
+    interval_seconds = 2
+    label_delay_seconds = 10  # Delay between capturing pictures for each label
+    output_folder = "my_pictures"  # Change this to the desired output folder name
+
+    # Create the output folder if it doesn't exist
+    if not os.path.exists(output_folder):
+        os.makedirs(output_folder)
+
+    for label in labels:
+        print(f"Taking pictures for label: {label}")
+        take_pictures(label, num_pictures_per_label, interval_seconds, output_folder)
+        time.sleep(label_delay_seconds)
+```
+This is how will look like:
+
+<p align="center">
+<img src="media/35.png" width="60%">
+</p>
+
+After that we now have a new data set that now we can upload our data to Roboflow. Now i’ll talk about the problem with the Raspberry Pi OS. What I tried is installing Roboflow in the Buster version and it didn’t work, it looks like there is no compatible version. Because of that now we need to setup the Raspberry with the latest version of Raspberry Pi OS Bullseye, the problem with Bullseye is that it has a new camera library named picamera2 so this new library is a little bit tricky and the OS also it doesn’t allow you to access the camera easy as in the buster version so is necessary to go to the terminal and activate it manually. To access to this configuration we need to type sudo raspi-config. Warning this doesn’t work with VNC you need a monitor connected to the Pi.
+
+<p align="center">
+<img src="media/36.png" width="60%">
+</p>
+
+Select the option 3 Interface Options. And will appear:
+
+<p align="center">
+<img src="media/37.png" width="60%">
+</p>
+
+Then select I1 Legaby Camera enable and then Enable after this will ask you about rebooting and to have the changes made is necessary to reboot it. Then is possible to run the code is really similar to the one in Buster.
+
+```
+import time
+from picamera2 import Picamera2, Preview
+from PIL import Image
+import os
+
+picam2 = Picamera2()
+
+def take_pictures(label, num_pictures, interval_seconds, output_folder):
+    folder_path = os.path.join(output_folder, label)
+    if not os.path.exists(folder_path):
+        os.makedirs(folder_path)
+
+    with picam2 as camera:
+        # Start the preview
+        camera.start(show_preview=True)
+
+        for i in range(1, num_pictures + 1):
+            # Generate the file name for the picture
+            file_name = os.path.join(folder_path, f"{label}_picture{i}.jpg")
+
+            # Capture the picture
+            camera.capture_file(file_name)
+
+            # Wait for the specified interval before taking the next picture
+            time.sleep(interval_seconds)
+
+        # Stop the preview after capturing all pictures
+        camera.stop_preview()
+
+if __name__ == "__main__":
+    labels = ["label1", "label2", "label3"]  # Add more labels if needed
+    num_pictures_per_label = 20
+    interval_seconds = 2
+    label_delay_seconds = 10  # Delay between capturing pictures for each label
+    output_folder = "my_pictures"  # Change this to the desired output folder name
+
+    # Create the output folder if it doesn't exist
+    if not os.path.exists(output_folder):
+        os.makedirs(output_folder)
+
+    for label in labels:
+        print(f"Taking pictures for label: {label}")
+        take_pictures(label, num_pictures_per_label, interval_seconds, output_folder)
+        time.sleep(label_delay_seconds)
+```
+
+Now after running any of the two previous codes to collect data let’s check how to upload this data from Raspberry Pi to Roboflow using the API.
+
+### Upload images to Roboflow using the API and Python.
+First we need to have our Raspberry with the Bullseye version check my tutorial to setup the Raspberry. Then we need to run in the terminal
+
+```
+pip install roboflow
+```
+
+If we had success installing the library, open Thonny the Python IDE from Raspberry and click Run with the next code to ulpload the images in the folder you create recently (Just change the corresponding values of your project).
+
+```
+import os
+from roboflow import Roboflow
+
+# Initialize the Roboflow object with your API key
+rf = Roboflow(api_key="xxxxxxxxxxxxxxxxx")
+
+# Retrieve your current workspace and project name
+print(rf.workspace())
+
+# Specify the project for upload
+project = rf.workspace("xxxxxxxx").project("xxxxxxxxx")
+
+# Folder path containing all the images
+folder_path = "/content/images"  # Update this to your folder path
+
+# Get a list of all image files in the folder
+image_files = [os.path.join(folder_path, file) for file in os.listdir(folder_path) if file.lower().endswith(('.jpg', '.jpeg', '.png'))]
+
+# Upload each image to your project
+for image_file in image_files:
+    project.upload(image_file)
+```
+
+In the Shell will appear all the information and if is running add some print to warning you when it’s over. When is running you will see that it takes a while, but the images will be uploaded.
+
+<p align="center">
+<img src="media/38.png" width="60%">
+</p>
+
+After it finishes you can wait a few minutes to see the images in the assign section from your Rboflow project as we see in the image below.
+
+<p align="center">
+<img src="media/34.png" width="60%">
+</p>
+
+Now we have a new data set of images to label manually and then retrain your model! By harnessing the potential of Active Learning with Raspberry Pi and Roboflow API, you’ve created a streamlined process for capturing images and utilizing the Roboflow label them seamlessly. So, go ahead, dive into the labeling process, and let the possibilities of Active Learning with Raspberry Pi and Roboflow API propel your machine learning journey.
+
+## How to Deploy a Roboflow (YOLOv8) Model to a Raspberry Pi
+
+To follow along with this tutorial, you will need a Raspberry Pi 4. You will need to run the 64-bit Raspberry Pi OS (Bullseye version) operating system.
+
+The Raspberry Pi is a useful edge deployment device for many computer vision applications and use cases. For applications that operate at lower frame rates, from motion-triggered security systems to wildlife surveying, a Pi is an excellent choice for a device on which to deploy your application. Pis are small and you can deploy a state-of-the-art YOLOv8 computer vision model on your Pi.
+
+Notably, you can run models on a Pi without an internet connection while still executing logic on your model inference results.
+
+In this guide, we’re going to walk through how to deploy a computer vision model to a Raspberry Pi. We’ll be deploying a model built on Roboflow that we will deploy to a local Docker container. By the end of the guide, we’ll have a working computer vision model ready to use on our Pi.
+
+Without further ado, let’s get started!
+
+We are going to take where we finish in Part 2 from this series where we have successfully trained our model. When the aforementioned deploy() function in your code, the weights were uploaded to Roboflow and the model was deployed, ready for use.
+
+This guide is to run the model using image files that we have saved locally.
+
+If your are going to take images check Part 4 from this series to see how use the camera in Raspberry Pi.
+
+
+### Download the Roboflow Docker Container to the Pi
+While we wait for our model to train, we can get things set up on our Raspberry Pi. To run our model on the Pi, we’re going to use the Roboflow inference server Docker container. This container contains a service that you can use to deploy your model on your Pi.
+
+To use the model we built on a Pi, we’ll first install Docker:
+
+```
+curl -fsSL https://get.docker.com -o get-docker.sh
+sudo sh get-docker.sh
+```
+
+After Docker is installed, we can pull the inference server Docker container that we will use to deploy our model:
+
+```
+sudo docker pull roboflow/inference-server:cpu
+
+```
+The inference API is available as a Docker container optimized and configured for the Raspberry Pi. You can install and run the inference server using the following command:
+
+```
+sudo docker run -it --rm -p 9001:9001 roboflow/roboflow-inference-server-arm-cpu
+```
+ou can now use your Pi as a drop-in replacement for the Hosted Inference API (see those docs for example code snippets in several programming languages).
+
+Next, install the Roboflow python package with pip install roboflow.
+
+### Run Inference
+To run inference on your model, run the following code, substituting your API key, workspace and project IDs, project version, and image name as relevant. You can learn how to find your API key in our API docs and how to find your workspace and project ID.
+
+
+```
+from roboflow import Roboflow
+
+rf = Roboflow(api_key="xxxxxxxxxxxxxxxxxxxx")
+project = rf.workspace().project("xxxxxxxx")
+model = project.version(1).model
+
+model.predict("your_image.jpg", confidence=40, overlap=30).save("prediction.jpg")
+
+prediction = model.predict("example.jpg")
+print(prediction.json())
+
+prediction.save("output.png")
+```
+
+This code tells our Python package that you want to run inference using a local server rather than the Roboflow API. The first time you run this code, you will need to have an internet connection. This is because the Python package will need to download your model for use in the inference server Docker container.
+
+After your model has been downloaded once, you can run the program as many times as you like without an internet connection.
+
+Now, let’s make a prediction on an image!
+
+We can retrieve a prediction from our model that shows hand is in this image with a blue rectangle like a labeled image, when we run the code, we see a JSON dictionary that contains the coordinates of the hand in our image.
+
+<p align="center">
+<img src="media/39.png" width="60%">
+</p>
+
+Our model is working! We can save an image that shows our annotated predictions, if we open up the file, we’ll see these results:
+
+<p align="center">
+<img src="media/40.png" width="60%">
+</p>
+
+Right now, our model works using image files that we have saved locally. But, that doesn’t need to be the case. You could use the Roboflow Python package with a tool like the Raspberry Pi camera to take a photo every few seconds or minutes and retrieve predictions. Or you could use the Pi camera to run your model on a live video feed.
+
+Conclusion
+The Raspberry Pi is a small, versatile device on which you can deploy your computer vision models. With the Roboflow Docker container, you can use state-of-the-art YOLOv8 models on your Raspberry Pi.
+
+Connected to a camera, you can use your Raspberry Pi as a fully-fledged edge inference device. Once you have downloaded your model to the device, an internet connection is not required, so you can use your Raspberry Pi wherever you have power.
+
+Now you have the knowledge you need to start deploying models onto a Raspberry Pi. Happy building!
+
 ## Challenges I ran into and What I learned
 
 One of the main challenges was to label with labelimg I didn't found a way to install it using Conda in Windows also the same in a virtual environment. After doing research I found how to download it in binary. 
