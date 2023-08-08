@@ -63,7 +63,7 @@
 * [Getting Started](#getting-started)
   * [Prerequisites](#prerequisites)
   * [Installation](#installation)
-* [Part 1: Introduction and Setup for Roboflow](#part-1-introduction-and-setup-for-roboflow)
+* [Introduction and Setup for Roboflow](#introduction-and-setup-for-roboflow)
   * [Demo of the Object Detection App](#demo-of-the-object-detection-app)
   * [Object Detection](#object-detection)
   * [What is YOLOv8?](#what-is-yolov8)
