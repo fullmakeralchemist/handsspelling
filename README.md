@@ -77,6 +77,13 @@
   * [Deploy model on Roboflow](#deploy-model-on-roboflow)
 * [Creating a Streamlit WebApp for Image Object Detection with a Roboflow model](#creating-a-streamlit-webapp-for-image-object-detection-with-a-roboflow-model)
   * [Create a Uploading an Image On Streamlit WebApp](#create-a-uploading-an-image-on-streamlit-webapp)
+* [Enhancing Active Learning: Uploading Data to Roboflow from Windows or Google Colab using the API](#enhancing-active-learning-uploading-data-to-roboflow-from-windows-or-google-colab-using-the-api)
+  * [Upload images to Roboflow using the API and Python](#upload-images-to-roboflow-using-the-api-and-python)
+* [Enhancing Active Learning: Uploading Data to Roboflow from Raspberry Pi using the API](#enhancing-active-learning-uploading-data-to-roboflow-from-raspberry-pi-using-the-api)
+  * [Upload images to Roboflow using the API and Python](#upload-images-to-roboflow-using-the-api-and-python-1)
+* [How to Deploy a Roboflow (YOLOv8) Model to a Raspberry Pi](#how-to-deploy-a-roboflow-yolov8-model-to-a-raspberry-pi)
+  * [Download the Roboflow Docker Container to the Pi](#download-the-roboflow-docker-container-to-the-pi)
+  * [Run Inference](#run-inference)
 * [Challenges I ran into and What I learned](#challenges-i-ran-into-and-what-i-learned)
 * [Observations about the project](#observations-about-the-project)
 * [Accomplishments that I'm proud of](#accomplishments-that-im-proud-of)
@@ -714,7 +721,7 @@ if __name__ == "__main__":
 
 Now after running any of the two previous codes to collect data let’s check how to upload this data from Raspberry Pi to Roboflow using the API.
 
-### Upload images to Roboflow using the API and Python.
+### Upload images to Roboflow using the API and Python(Thonny IDE in Raspberry Pi).
 First we need to have our Raspberry with the Bullseye version check my tutorial to setup the Raspberry. Then we need to run in the terminal
 
 ```
