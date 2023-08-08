@@ -80,7 +80,7 @@
 * [Enhancing Active Learning: Uploading Data to Roboflow from Windows or Google Colab using the API](#enhancing-active-learning-uploading-data-to-roboflow-from-windows-or-google-colab-using-the-api)
   * [Upload images to Roboflow using the API and Python](#upload-images-to-roboflow-using-the-api-and-python)
 * [Enhancing Active Learning: Uploading Data to Roboflow from Raspberry Pi using the API](#enhancing-active-learning-uploading-data-to-roboflow-from-raspberry-pi-using-the-api)
-  * [Upload images to Roboflow using the API and Python](#upload-images-to-roboflow-using-the-api-and-python-1)
+  * [Upload images to Roboflow using the API and Python (Thonny IDE in Raspberry Pi)](#upload-images-to-roboflow-using-the-api-and-python-thonny-ide-in-raspberry-pi)
 * [How to Deploy a Roboflow (YOLOv8) Model to a Raspberry Pi](#how-to-deploy-a-roboflow-yolov8-model-to-a-raspberry-pi)
   * [Download the Roboflow Docker Container to the Pi](#download-the-roboflow-docker-container-to-the-pi)
   * [Run Inference](#run-inference)
@@ -140,7 +140,7 @@ This is short list things you need to use the guide.
 * Python
 * Git
 
-## Part 1: Introduction and Setup for Roboflow
+## Introduction and Setup for Roboflow
 Welcome to Part 1 of our three-part tutorial series on Building Your Own Real-Time Object Detection App: Roboflow(YOLOv8) and Streamlit. In this series, we will walk you through the process of building an end-to-end object detection app that can identify objects from a photo. This web app was built only for images because we are using [share.streamlit.io](http://share.streamlit.io/) this is the Streamlit project hub where you can post your Streamlit projects free and it has a limit of 1 GB memory space for the app, there is a few libraries that cover a lot of that space so in another post or series I’ll add more about video and webcam functions to complement this app.
 
 In Part 1, we will introduce the project, give you a demo of the app in action, and explain why I chose Roboflow and Streamlit for this project. We will also guide you through the setup process, including installing dependencies and creating the necessary files and directories.
@@ -526,7 +526,7 @@ from IPython.display import display, Image
 !pip install roboflow --quiet
 ```
 
-After this our notebook is ready to run the scrip. Before diving in to the code I need to remember that we need new data to upload. So make sure you have run the code from Part 1.
+After this our notebook is ready to run the scrip. Before diving in to the code I need to remember that we need new data to upload. So make sure you have run the code from [Project Setup: Installing Dependencies and Creating Required Files and Directories](#project-setup-installing-dependencies-and-creating-required-files-and-directories) to get new data.
 
 After that we now have a new data set that now we can upload our data to Roboflow using the API.
 
@@ -721,8 +721,8 @@ if __name__ == "__main__":
 
 Now after running any of the two previous codes to collect data let’s check how to upload this data from Raspberry Pi to Roboflow using the API.
 
-### Upload images to Roboflow using the API and Python(Thonny IDE in Raspberry Pi).
-First we need to have our Raspberry with the Bullseye version check my tutorial to setup the Raspberry. Then we need to run in the terminal
+### Upload images to Roboflow using the API and Python (Thonny IDE in Raspberry Pi).
+First we need to have our Raspberry with the Bullseye version check my tutorial to setup the Raspberry[Setting up your Raspberry Pi 4 wireless (2023)](https://medium.com/geekculture/setting-up-your-raspberry-pi-4-wireless-cd3e70a53e3b). Then we need to run in the terminal
 
 ```
 pip install roboflow
@@ -780,11 +780,11 @@ In this guide, we’re going to walk through how to deploy a computer vision mod
 
 Without further ado, let’s get started!
 
-We are going to take where we finish in Part 2 from this series where we have successfully trained our model. When the aforementioned deploy() function in your code, the weights were uploaded to Roboflow and the model was deployed, ready for use.
+We are going to take where we finish in [Deploy model on Roboflow](#deploy-model-on-roboflow) from this repo where we have successfully trained our model. When the aforementioned deploy() function in your code, the weights were uploaded to Roboflow and the model was deployed, ready for use.
 
 This guide is to run the model using image files that we have saved locally.
 
-If your are going to take images check Part 4 from this series to see how use the camera in Raspberry Pi.
+If your are going to take images check * [Enhancing Active Learning: Uploading Data to Roboflow from Raspberry Pi using the API](#enhancing-active-learning-uploading-data-to-roboflow-from-raspberry-pi-using-the-api) from this repo to see how use the camera in Raspberry Pi.
 
 
 ### Download the Roboflow Docker Container to the Pi
