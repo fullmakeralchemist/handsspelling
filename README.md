@@ -93,7 +93,7 @@
 * [How to Deploy a Roboflow (YOLOv8) Model to a Raspberry Pi](#how-to-deploy-a-roboflow-yolov8-model-to-a-raspberry-pi)
   * [Download the Roboflow Docker Container to the Pi](#download-the-roboflow-docker-container-to-the-pi)
   * [Run Inference](#run-inference)
-* [How to deploy a Streamlit app in Raspberry Pi locally](#how-to-deploy-a-roboflow-yolov8-model-to-a-raspberry-pi)
+* [How to deploy a Streamlit app in Raspberry Pi locally](#how-to-deploy-a-streamlit-app-in-raspberry-pi-locally)
   * [Advantages of Running Locally](#advantages-of-running-locally)
   * [Prerequisites](#prerequisites-1)
   * [Raspberry Pi 4 Setup](#raspberry-pi-4-setup)
