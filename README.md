@@ -40,7 +40,7 @@
   
   <!-- <h3 align="center">Tiny ML in Mapping Dance, Visual Arts and interactive museums</h3>-->
   <p align="center">
-    <h3>Por favor revisen los dos links de streamlit uno es el que pude mejorar en la semana extra----></h3>
+    <h3>Por favor revisen los dos links de streamlit uno es el que pude mejorar en la semana extra demos -------></h3>
     <br />
     <a href="https://objectdetectionwebcam.streamlit.app/"><strong>Proyecto deteccion de objetos en imagenes»</strong></a>
     <br />
@@ -82,6 +82,12 @@
   * [Deploy model on Roboflow](#deploy-model-on-roboflow)
 * [Creating a Streamlit WebApp for Image Object Detection with a Roboflow model](#creating-a-streamlit-webapp-for-image-object-detection-with-a-roboflow-model)
   * [Create a Uploading an Image On Streamlit WebApp](#create-a-uploading-an-image-on-streamlit-webapp)
+* [How to add video and webcam object detection and tracking in your Streamlit App](#how-to-add-video-and-webcam-object-detection-and-tracking-in-your-streamlit-app)
+  * [Implementing Object Tracking with YOLOv8 Architectures](#implementing-object-tracking-with-yolov8-architectures)
+  * [Getting Started With YoloV8 Tracking](#getting-started-with-yolov8-tracking)
+  * [Implementing the Object-Tracking In Our Streamlit App](#implementing-the-object-tracking-in-our-streamlit-app)
+  * [Implementing the Object-Tracking In Our Streamlit App](#implementing-the-object-tracking-in-our-streamlit-app)
+
 * [Enhancing Active Learning: Uploading Data to Roboflow from Windows or Google Colab using the API](#enhancing-active-learning-uploading-data-to-roboflow-from-windows-or-google-colab-using-the-api)
   * [Upload images to Roboflow using the API and Python](#upload-images-to-roboflow-using-the-api-and-python)
 * [Enhancing Active Learning: Uploading Data to Roboflow from Raspberry Pi using the API](#enhancing-active-learning-uploading-data-to-roboflow-from-raspberry-pi-using-the-api)
@@ -89,6 +95,11 @@
 * [How to Deploy a Roboflow (YOLOv8) Model to a Raspberry Pi](#how-to-deploy-a-roboflow-yolov8-model-to-a-raspberry-pi)
   * [Download the Roboflow Docker Container to the Pi](#download-the-roboflow-docker-container-to-the-pi)
   * [Run Inference](#run-inference)
+* [How to deploy a Streamlit app in Raspberry Pi locally](#how-to-streamlit-app-in-raspberry-pi-locally)
+  * [Advantages of Running Locally](#advantages-of-running-locally)
+  * [Prerequisites](#prerequisites-1)
+  * [Raspberry Pi 4 Setup](#raspberry-pi-4-setup)
+  * [Installing PyTorch and OpenCV](#installing-pytorch-and-opencv)
 * [Challenges I ran into and What I learned](#challenges-i-ran-into-and-what-i-learned)
 * [Observations about the project](#observations-about-the-project)
 * [Accomplishments that I'm proud of](#accomplishments-that-im-proud-of)
