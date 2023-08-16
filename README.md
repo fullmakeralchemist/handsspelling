@@ -1286,20 +1286,21 @@ Now you have the knowledge you need to start deploying models onto a Raspberry P
 
 ## How to Streamlit app in Raspberry Pi locally
 
-Advantages of Running Locally
+### Advantages of Running Locally
 One such advantage is the seamless access to the Raspberry Pi’s built-in camera. By harnessing the potential of the local server, we gain the ability to interact with the camera module directly from our computer, opening up a realm of possibilities for remote surveillance, monitoring, and data collection. This proximity-based approach not only reduces latency but also offers greater control over the application’s performance, ensuring a smoother and more responsive user experience.
 
 In the following sections, I will guide you through the step-by-step process of setting up the Raspberry Pi to run our Streamlit object detection app. So, let’s dive into the world of edge computing and uncover the potential that awaits when we bring AI closer to home.
 
-Prerequisites
+### Prerequisites
 To follow this tutorial you’ll need a Raspberry Pi 4, a camera for it and all the other standard accessories.
 
-Raspberry Pi 4 Model B 4GB or +
-Raspberry Pi Camera Module
-Heat sinks and Fan (optional but recommended)
-5V 3A USB-C Power Supply
-SD card (at least 8gb)
-Raspberry Pi 4 Setup
+* Raspberry Pi 4 Model B 4GB or +
+* Raspberry Pi Camera Module
+* Heat sinks and Fan (optional but recommended)
+* 5V 3A USB-C Power Supply
+* SD card (at least 8gb)
+
+### Raspberry Pi 4 Setup
 PyTorch only provides pip packages for Arm 64bit (aarch64) so you’ll need to install a 64 bit version of the OS on your Raspberry Pi
 
 You can download the version used in this guide arm64 Raspberry Pi OS from https://downloads.raspberrypi.org/raspios_arm64/images/ and install it via rpi-imager use this [tutorial](https://medium.com/@lalodatos/setting-up-your-raspberry-pi-4-wireless-2023-14a1229d374b) I create to install the specific version.
@@ -1310,8 +1311,72 @@ Once that boots and you complete the initial setup you’ll need to edit the `/b
 
 Use `cd ..` in the comand line to change folder until you found the boot folder and use `sudo nano config.txt` to be able to modify this file.
 
+<p align="center">
+<img src="media/46.png" width="60%">
+</p>
+
+Make the next changes adding and commenting lines. Once done the changes use `ctrl + O` and `ctrl + X` so save the changes and close the file.
+
+```
+# This enables the extended features such as the camera.
+start_x=1
+
+# This needs to be at least 128M for the camera processing, if it's bigger you can just leave it as is.
+gpu_mem=128
+
+# You need to commment/remove the existing camera_auto_detect line since this causes issues with OpenCV/V4L2 capture.
+#camera_auto_detect=1
+
+```
+### Installing PyTorch and OpenCV
+PyTorch and all the other libraries we need have ARM 64-bit/aarch64 variants so you can just install them via pip and have it work like any other Linux system.
+
+```
+pip install torch torchvision 
+pip install opencv-python
+pip install numpy --upgrade
+```
+<p align="center">
+<img src="media/47.png" width="60%">
+</p>
+
+We can now check that everything installed correctly:
+
+```
+python -c "import torch; print(torch.__version__)"
+
+```
+Now with this we can start installing the missing libraries:
+```
+pip install ultralytics 
+pip install streamlit
+```
+
+After we have everything installed we need to reboot the Raspberry after the boot we can run the command streamlit hello in the terminal to check everything is ready.
+
+| Run               | App               |
+| ---------------------- | ---------------------- |
+| ![run](media/48.png) | ![app](media/49.png) |
 
 
+Then we can use git clone with my repository to have a local copy from the project.
+```
+git clone https://github.com/fullmakeralchemist/raspberrystreamlit
+```
+
+Once we have the local copy we just need to change the folder to the one that have the run.py file and then we can run from the command line using:
+
+```
+streamlit run app.py
+```
+
+In the white interface we can see the Streamlit in Raspberry Pi but the black one is in my laptop we can do this using the local URL when we run the app, copy and paste the url in the browser from your laptop, this will work only if we have the Pi and the laptop connected to the same router.
+
+| Run               | App               |
+| ---------------------- | ---------------------- |
+| ![run](media/48.png) | ![app](media/49.png) |
+
+The Pi proves to be an invaluable tool for democratizing access to AI and machine learning capabilities. Its compact form factor, cost-effectiveness, and versatility make it a powerful device for building and deploying applications that bridge the gap between data sources and intelligent processing. By accessing the Raspberry Pi’s camera through a local server, we unlock the potential for remote monitoring, surveillance, and data acquisition. 
 
 ## Challenges I ran into and What I learned
 
