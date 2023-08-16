@@ -1295,7 +1295,7 @@ Connected to a camera, you can use your Raspberry Pi as a fully-fledged edge inf
 
 Now you have the knowledge you need to start deploying models onto a Raspberry Pi. 
 
-## How to Streamlit app in Raspberry Pi locally
+## How to deplot a Streamlit app in Raspberry Pi locally
 
 ### Advantages of Running Locally
 One such advantage is the seamless access to the Raspberry Pi’s built-in camera. By harnessing the potential of the local server, we gain the ability to interact with the camera module directly from our computer, opening up a realm of possibilities for remote surveillance, monitoring, and data collection. This proximity-based approach not only reduces latency but also offers greater control over the application’s performance, ensuring a smoother and more responsive user experience.
