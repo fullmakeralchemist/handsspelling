@@ -86,8 +86,6 @@
   * [Implementing Object Tracking with YOLOv8 Architectures](#implementing-object-tracking-with-yolov8-architectures)
   * [Getting Started With YoloV8 Tracking](#getting-started-with-yolov8-tracking)
   * [Implementing the Object-Tracking In Our Streamlit App](#implementing-the-object-tracking-in-our-streamlit-app)
-  * [Implementing the Object-Tracking In Our Streamlit App](#implementing-the-object-tracking-in-our-streamlit-app)
-
 * [Enhancing Active Learning: Uploading Data to Roboflow from Windows or Google Colab using the API](#enhancing-active-learning-uploading-data-to-roboflow-from-windows-or-google-colab-using-the-api)
   * [Upload images to Roboflow using the API and Python](#upload-images-to-roboflow-using-the-api-and-python)
 * [Enhancing Active Learning: Uploading Data to Roboflow from Raspberry Pi using the API](#enhancing-active-learning-uploading-data-to-roboflow-from-raspberry-pi-using-the-api)
@@ -95,7 +93,7 @@
 * [How to Deploy a Roboflow (YOLOv8) Model to a Raspberry Pi](#how-to-deploy-a-roboflow-yolov8-model-to-a-raspberry-pi)
   * [Download the Roboflow Docker Container to the Pi](#download-the-roboflow-docker-container-to-the-pi)
   * [Run Inference](#run-inference)
-* [How to deploy a Streamlit app in Raspberry Pi locally](#how-to-streamlit-app-in-raspberry-pi-locally)
+* [How to deploy a Streamlit app in Raspberry Pi locally](#how-to-deploy-a-roboflow-yolov8-model-to-a-raspberry-pi)
   * [Advantages of Running Locally](#advantages-of-running-locally)
   * [Prerequisites](#prerequisites-1)
   * [Raspberry Pi 4 Setup](#raspberry-pi-4-setup)
@@ -1295,7 +1293,7 @@ Connected to a camera, you can use your Raspberry Pi as a fully-fledged edge inf
 
 Now you have the knowledge you need to start deploying models onto a Raspberry Pi. 
 
-## How to deplot a Streamlit app in Raspberry Pi locally
+## How to deploy a Streamlit app in Raspberry Pi locally
 
 ### Advantages of Running Locally
 One such advantage is the seamless access to the Raspberry Pi’s built-in camera. By harnessing the potential of the local server, we gain the ability to interact with the camera module directly from our computer, opening up a realm of possibilities for remote surveillance, monitoring, and data collection. This proximity-based approach not only reduces latency but also offers greater control over the application’s performance, ensuring a smoother and more responsive user experience.
