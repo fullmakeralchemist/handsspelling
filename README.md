@@ -1381,7 +1381,7 @@ streamlit run app.py
 
 In the white interface we can see the Streamlit in Raspberry Pi but the black one is in my laptop we can do this using the local URL when we run the app, copy and paste the url in the browser from your laptop, this will work only if we have the Pi and the laptop connected to the same router.
 
-| Run               | App               |
+| Raspberry Pi               | Laptop           |
 | ---------------------- | ---------------------- |
 | ![run](media/50.png) | ![app](media/51.png) |
 
