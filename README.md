@@ -40,7 +40,7 @@
   
   <!-- <h3 align="center">Tiny ML in Mapping Dance, Visual Arts and interactive museums</h3>-->
   <p align="center">
-    rPor favor revisen los dos links de streamlit uno es el que pude mejorar en la semana extra---->
+    <h3>Por favor revisen los dos links de streamlit uno es el que pude mejorar en la semana extra----></h3>
     <br />
     <a href="https://objectdetectionwebcam.streamlit.app/"><strong>Proyecto deteccion de objetos en imagenes»</strong></a>
     <br />
@@ -1374,7 +1374,7 @@ In the white interface we can see the Streamlit in Raspberry Pi but the black on
 
 | Run               | App               |
 | ---------------------- | ---------------------- |
-| ![run](media/48.png) | ![app](media/49.png) |
+| ![run](media/50.png) | ![app](media/51.png) |
 
 The Pi proves to be an invaluable tool for democratizing access to AI and machine learning capabilities. Its compact form factor, cost-effectiveness, and versatility make it a powerful device for building and deploying applications that bridge the gap between data sources and intelligent processing. By accessing the Raspberry Pi’s camera through a local server, we unlock the potential for remote monitoring, surveillance, and data acquisition. 
 
