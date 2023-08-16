@@ -40,7 +40,7 @@
   
   <!-- <h3 align="center">Tiny ML in Mapping Dance, Visual Arts and interactive museums</h3>-->
   <p align="center">
-    <h3>Por favor revisen los dos links de streamlit uno es el que pude mejorar en la semana extra demos -------></h3>
+    <h3>Por favor revisen los dos links de streamlit uno es el que pude mejorar en la semana extra   Demos en Streamlit Share-------></h3>
     <br />
     <a href="https://objectdetectionwebcam.streamlit.app/"><strong>Proyecto deteccion de objetos en imagenes»</strong></a>
     <br />
