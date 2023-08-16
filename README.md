@@ -21,8 +21,9 @@
   <a href="https://github.com/fullmakeralchemist/tinyml-mapping-backlight">
     <img src="assets/logo.png" alt="Logo" width="720">
   </a>
-  <br />
   -->
+  <br />
+  
 
   <img src="https://img.shields.io/github/languages/top/fullmakeralchemist/handsspelling?style=for-the-badge" alt="License" height="25">
   <img src="https://img.shields.io/github/repo-size/fullmakeralchemist/handsspelling?style=for-the-badge" alt="GitHub repo size" height="25">
@@ -36,14 +37,18 @@
     <img src="https://img.shields.io/twitter/follow/makeralchemist?label=Twitter&logo=twitter&style=for-the-badge" alt="Twitter" height="25">
   </a>
   -->
-  <!--
-   <h3 align="center">Tiny ML in Mapping Dance, Visual Arts and interactive museums</h3>
+  
+  <!-- <h3 align="center">Tiny ML in Mapping Dance, Visual Arts and interactive museums</h3>-->
   <p align="center">
-    Because Art Inspired Technology, Technology Inspired Art
+    rPor favor revisen los dos links de streamlit uno es el que pude mejorar en la semana extra---->
     <br />
-    <a href="https://experiments.withgoogle.com/mapping-dance"><strong>View the project»</strong></a>
+    <a href="https://objectdetectionwebcam.streamlit.app/"><strong>Proyecto deteccion de objetos en imagenes»</strong></a>
+    <br />
+    <br />
+    <a href="https://experiments.withgoogle.com/mapping-dance"><strong>Proyecto deteccion de objetos en video y webcam»</strong></a>
     <br />
   </p>
+  <!--
   <p align="center">
   <a href="https://experiments.withgoogle.com/mapping-dance">
     <img src="assets/TFChallengeWinners.png" alt="Logo" width="720">
@@ -480,6 +485,427 @@ Then you can try your app and check if it works properly.
 
 The combination of Roboflow and Streamlit enables the development of applications with a user-friendly interface. This approach makes it easier to detect and track objects in real time, allowing for a wide range of use cases not only for Object detection models for other data science and ML projects.
 
+
+## How to add video and webcam object detection and tracking in your Streamlit App
+
+### Implementing Object Tracking with YOLOv8 Architectures
+We know that object tracking is like keeping an eye on something as it moves in a video or pictures. YOLOv8, offers a straightforward implementation of the tracking algorithm with two different architectures:
+
+BoT-SORT and
+ByteTrack
+BoT-SORT and ByteTrack each bring their own unique strengths to the table. BoT-SORT is a dependable default option, known for its robust performance and reliability in tracking objects. On the other hand, ByteTrack offers an alternative approach, providing efficiency and flexibility for those who prioritize those aspects. In essence, BoT-SORT leans towards tried-and-true effectiveness, while ByteTrack offers a balance of efficiency and adaptability, allowing you to choose based on your specific project needs and preferences.
+
+### Getting Started With YoloV8 Tracking
+In the code, you need to specify the path to the pre-trained YOLOv8 model we create in the previous part the file best.pt and the path to the input video. I downloaded one from Youtube with live long and prosper signs and then put it into a folder called videos. You can then adjust the confidence and tracking options. Finally, you can specify whether to persist the tracking results, show the tracking output in a window, or save it to a file.
+
+Once you run this script, you will see that the tracking algorithm is applied on each frame of the video and the video is displayed in an OpenCV window. This can be a great starting point for building more complex object-tracking applications using YOLOv8.
+
+### Implementing the Object-Tracking In Our Streamlit App
+In order to display the frames with object tracking in the Streamlit app, we need to take a slightly different approach. Rather than processing an entire video as we did in the previous implementation, we will instead pass individual frames one by one to the YOLOv8 model, and then display them inside an empty Streamlit frame within our app.
+
+This method allows us to easily integrate the YOLOv8 tracking algorithm with our Streamlit app, giving us real-time updates on the objects being tracked. We used a similar approach in Part 3 of this series and will build upon that implementation here in Part 4.
+
+In the virtual environment you have to install pytube that is necessary to run the video object tracking with Youtube video.
+
+```
+pip install pytube
+```
+But we have to do a small change in the library pytube in out virtual enviroment we have to go to the folder env from this project and follow the next path:
+
+```
+\env\Lib\site-packages\pytube
+```
+Then open the file cipher.py and change the line number 30 for:`var_regex = re.compile(r"^\w+\W")`` to `var_regex = re.compile(r"^$*\w+\W")``. With this change we can run the option Youtube in our app.
+
+For this implementation, we will create three files with names `settings.py`, `app.py`, and `helper.py`. Let’s first write the code for `settings.py file`. It does not need the image variables.
+
+```
+from pathlib import Path
+import sys
+
+# Get the absolute path of the current file
+file_path = Path(__file__).resolve()
+
+# Get the parent directory of the current file
+root_path = file_path.parent
+
+# Add the root path to the sys.path list if it is not already there
+if root_path not in sys.path:
+    sys.path.append(str(root_path))
+
+# Get the relative path of the root directory with respect to the current working directory
+ROOT = root_path.relative_to(Path.cwd())
+
+# Sources
+IMAGE = 'Image'
+VIDEO = 'Video'
+WEBCAM = 'Webcam'
+YOUTUBE = 'YouTube'
+
+SOURCES_LIST = [IMAGE, VIDEO, WEBCAM, YOUTUBE]
+
+# Images config
+IMAGES_DIR = ROOT / 'images'
+DEFAULT_IMAGE = IMAGES_DIR / 'office_4.jpg'
+DEFAULT_DETECT_IMAGE = IMAGES_DIR / 'office_4_detected.jpg'
+
+# Videos config
+VIDEO_DIR = ROOT / 'videos'
+VIDEO_1_PATH = VIDEO_DIR / 'video_1.mp4'
+VIDEOS_DICT = {
+    'video_1': VIDEO_1_PATH
+}
+
+# ML Model config
+MODEL_DIR = ROOT / 'weights'
+DETECTION_MODEL = MODEL_DIR / 'best.pt'
+SEGMENTATION_MODEL = MODEL_DIR / 'yolov8n-seg.pt'
+
+# Webcam
+WEBCAM_PATH = 0
+
+```
+
+In our implementation, the `settings.py` file plays an important role. This file contains the configuration settings for the videos and machine learning models that we will be using. With the help of the `pathlib` and `sys libraries`, `the settings.py` file allows us to set the path for the current file and its parent directory, add the root path to the `sys.path` list, and define the relative path of the root directory with respect to the current working directory.
+
+Additionally, this file defines the sources and videos we will be using, as well as the location of our machine learning models. Now let’s write the code for theapp.py file.
+
+The `app.py` is designed to be integrated with a Streamlit web application, which provides a simple and intuitive user interface. The code loads the pre-trained YOLOv8 model and the settings module to configure the machine learning model and to choose the source type, such as image, video, webcam, or YouTube video. If an image is chosen, users can upload it using the file uploader.
+
+<p align="center">
+<img src="media/41.png" width="60%">
+</p>
+
+Based on the user’s selection of task and confidence level, the script selects either the detection or segmentation model and then proceeds to load the model.
+
+<p align="center">
+<img src="media/42.png" width="60%">
+</p>
+
+The streamlit interface and real-time detection make this application a valuable tool for various scenarios. When a media source is uploaded, the code uses the YOLOv8 model to predict and highlight objects. Detected bounding boxes are displayed, along with a plotted image. For video sources (stored, webcam, or YouTube), corresponding functions from the `helper` module are called to display the video feed with real-time object detection.
+
+<p align="center">
+<img src="media/43.png" width="60%">
+</p>
+
+```
+# Python In-built packages
+from pathlib import Path
+import PIL
+
+# External packages
+import streamlit as st
+
+# Local Modules
+import settings
+import helper
+
+# Setting page layout
+st.set_page_config(
+    page_title="Object Detection using YOLOv8",
+    page_icon="🤖",
+    layout="wide",
+    initial_sidebar_state="expanded"
+)
+
+# Main page heading
+st.title("Object Detection")
+st.caption('Updload a photo with this :blue[hand signals]: :+1:, :hand:, :i_love_you_hand_sign:, and :spock-hand:.')
+st.caption('Then click the :blue[Detect Objects] button and check the result.')
+
+# Sidebar
+st.sidebar.header("ML Model Config")
+
+# Model Options
+model_type = st.sidebar.radio(
+    "Select Task", ['Detection', 'Segmentation'])
+
+confidence = float(st.sidebar.slider(
+    "Select Model Confidence", 25, 100, 40)) / 100
+
+# Selecting Detection Or Segmentation
+if model_type == 'Detection':
+    model_path = Path(settings.DETECTION_MODEL)
+elif model_type == 'Segmentation':
+    model_path = Path(settings.SEGMENTATION_MODEL)
+
+# Load Pre-trained ML Model
+try:
+    model = helper.load_model(model_path)
+except Exception as ex:
+    st.error(f"Unable to load model. Check the specified path: {model_path}")
+    st.error(ex)
+
+st.sidebar.header("Image/Video Config")
+source_radio = st.sidebar.radio(
+    "Select Source", settings.SOURCES_LIST)
+
+source_img = None
+# If image is selected
+if source_radio == settings.IMAGE:
+    source_img = st.sidebar.file_uploader(
+        "Choose an image...", type=("jpg", "jpeg", "png", 'bmp', 'webp'))
+
+    col1, col2 = st.columns(2)
+
+    with col1:
+        try:
+            if source_img:
+                uploaded_image = PIL.Image.open(source_img)
+                st.image(source_img, caption="Uploaded Image",
+                         use_column_width=True)
+        except Exception as ex:
+            st.error("Error occurred while opening the image.")
+            st.error(ex)
+
+    with col2:        
+            if st.sidebar.button('Detect Objects'):
+                res = model.predict(uploaded_image,
+                                    conf=confidence
+                                    )
+                boxes = res[0].boxes
+                res_plotted = res[0].plot()[:, :, ::-1]
+                st.image(res_plotted, caption='Detected Image',
+                         use_column_width=True)
+                try:
+                    with st.expander("Detection Results"):
+                        for box in boxes:
+                            st.write(box.data)
+                except Exception as ex:
+                    # st.write(ex)
+                    st.write("No image is uploaded yet!")
+
+elif source_radio == settings.VIDEO:
+    helper.play_stored_video(confidence, model)
+
+elif source_radio == settings.WEBCAM:
+    helper.play_webcam(confidence, model)
+
+elif source_radio == settings.YOUTUBE:
+    helper.play_youtube_video(confidence, model)
+
+else:
+    st.error("Please select a valid source type!")
+
+```
+
+The helper.py file contains functions that are called from the app.py file. This file uses OpenCV and pytube (for YouTube video handling) libraries to read and process the video and Streamlit to display the video and detected objects.
+
+The load_model() function initializes the YOLOv8 object detection model by loading it from the specified model path.
+
+The display_tracker_options() function offers users the choice to enable object tracking. Users can select how to display tracking results and select a tracking algorithm (e.g., bytetrack.yaml or botsort.yaml). The _display_detected_frames() function displays video frames with detected objects. It resizes the image and calls the appropriate tracking or prediction methods based on user preferences.
+
+The play_youtube_video() function enables users to input a YouTube video URL. It processes the video, performs real-time object detection, and displays the results on the web page. The play_webcam() function captures the webcam feed, processes frames, and displays real-time object detection and tracking results.
+
+```
+from ultralytics import YOLO
+import streamlit as st
+import cv2
+from pytube import YouTube
+
+import settings
+
+
+def load_model(model_path):
+    """
+    Loads a YOLO object detection model from the specified model_path.
+
+    Parameters:
+        model_path (str): The path to the YOLO model file.
+
+    Returns:
+        A YOLO object detection model.
+    """
+    model = YOLO(model_path)
+    return model
+
+
+def display_tracker_options():
+    display_tracker = st.radio("Display Tracker", ('Yes', 'No'))
+    is_display_tracker = True if display_tracker == 'Yes' else False
+    if is_display_tracker:
+        tracker_type = st.radio("Tracker", ("bytetrack.yaml", "botsort.yaml"))
+        return is_display_tracker, tracker_type
+    return is_display_tracker, None
+
+
+def _display_detected_frames(conf, model, st_frame, image, is_display_tracking=None, tracker=None):
+    """
+    Display the detected objects on a video frame using the YOLOv8 model.
+
+    Args:
+    - conf (float): Confidence threshold for object detection.
+    - model (YoloV8): A YOLOv8 object detection model.
+    - st_frame (Streamlit object): A Streamlit object to display the detected video.
+    - image (numpy array): A numpy array representing the video frame.
+    - is_display_tracking (bool): A flag indicating whether to display object tracking (default=None).
+
+    Returns:
+    None
+    """
+
+    # Resize the image to a standard size
+    image = cv2.resize(image, (720, int(720*(9/16))))
+
+    # Display object tracking, if specified
+    if is_display_tracking:
+        res = model.track(image, conf=conf, persist=True, tracker=tracker)
+    else:
+        # Predict the objects in the image using the YOLOv8 model
+        res = model.predict(image, conf=conf)
+
+    # # Plot the detected objects on the video frame
+    res_plotted = res[0].plot()
+    st_frame.image(res_plotted,
+                   caption='Detected Video',
+                   channels="BGR",
+                   use_column_width=True
+                   )
+
+
+def play_youtube_video(conf, model):
+    """
+    Plays a webcam stream. Detects Objects in real-time using the YOLOv8 object detection model.
+
+    Parameters:
+        conf: Confidence of YOLOv8 model.
+        model: An instance of the `YOLOv8` class containing the YOLOv8 model.
+
+    Returns:
+        None
+
+    Raises:
+        None
+    """
+    source_youtube = st.sidebar.text_input("YouTube Video url")
+
+    is_display_tracker, tracker = display_tracker_options()
+
+    if st.sidebar.button('Detect Objects'):
+        try:
+            yt = YouTube(source_youtube)
+            stream = yt.streams.filter(file_extension="mp4", res=720).first()
+            vid_cap = cv2.VideoCapture(stream.url)
+
+            st_frame = st.empty()
+            while (vid_cap.isOpened()):
+                success, image = vid_cap.read()
+                if success:
+                    _display_detected_frames(conf,
+                                             model,
+                                             st_frame,
+                                             image,
+                                             is_display_tracker,
+                                             tracker
+                                             )
+                else:
+                    vid_cap.release()
+                    break
+        except Exception as e:
+            st.sidebar.error("Error loading video: " + str(e))
+
+
+def play_webcam(conf, model):
+    """
+    Plays a webcam stream. Detects Objects in real-time using the YOLOv8 object detection model.
+
+    Parameters:
+        conf: Confidence of YOLOv8 model.
+        model: An instance of the `YOLOv8` class containing the YOLOv8 model.
+
+    Returns:
+        None
+
+    Raises:
+        None
+    """
+    source_webcam = settings.WEBCAM_PATH
+    is_display_tracker, tracker = display_tracker_options()
+    if st.sidebar.button('Detect Objects'):
+        try:
+            vid_cap = cv2.VideoCapture(source_webcam)
+            st_frame = st.empty()
+            while (vid_cap.isOpened()):
+                success, image = vid_cap.read()
+                if success:
+                    _display_detected_frames(conf,
+                                             model,
+                                             st_frame,
+                                             image,
+                                             is_display_tracker,
+                                             tracker,
+                                             )
+                else:
+                    vid_cap.release()
+                    break
+        except Exception as e:
+            st.sidebar.error("Error loading video: " + str(e))
+
+
+def play_stored_video(conf, model):
+    """
+    Plays a stored video file. Tracks and detects objects in real-time using the YOLOv8 object detection model.
+
+    Parameters:
+        conf: Confidence of YOLOv8 model.
+        model: An instance of the `YOLOv8` class containing the YOLOv8 model.
+
+    Returns:
+        None
+
+    Raises:
+        None
+    """
+    source_vid = st.sidebar.selectbox(
+        "Choose a video...", settings.VIDEOS_DICT.keys())
+
+    is_display_tracker, tracker = display_tracker_options()
+
+    with open(settings.VIDEOS_DICT.get(source_vid), 'rb') as video_file:
+        video_bytes = video_file.read()
+    if video_bytes:
+        st.video(video_bytes)
+
+    if st.sidebar.button('Detect Video Objects'):
+        try:
+            vid_cap = cv2.VideoCapture(
+                str(settings.VIDEOS_DICT.get(source_vid)))
+            st_frame = st.empty()
+            while (vid_cap.isOpened()):
+                success, image = vid_cap.read()
+                if success:
+                    _display_detected_frames(conf,
+                                             model,
+                                             st_frame,
+                                             image,
+                                             is_display_tracker,
+                                             tracker
+                                             )
+                else:
+                    vid_cap.release()
+                    break
+        except Exception as e:
+            st.sidebar.error("Error loading video: " + str(e))
+
+```
+One last thing from the previous images above, you can see the unique identifiers of the detected objects, in this case, hands. These IDs are assigned by the object detection model to each detected object. This allows the model to keep track of the same object across multiple frames of the video or image sequence, which is useful for applications like object tracking. The IDs can also be used to label and annotate the detected objects for further analysis or processing.
+
+In the options if you choose No Tracking, the image below you can see our application is no longer displaying the object IDs.
+
+<p align="center">
+<img src="media/44.png" width="60%">
+</p>
+
+If you select the video source as YouTube, you can paste the URL of the YouTube video in the text box provided below. On pressing the ‘Detect Objects’ button, you will be able to view the frames of the video along with the detected objects, based on the options selected is slow but it works fine (I’ll do my research to optimize speed).
+
+<p align="center">
+<img src="media/45.png" width="60%">
+</p>
+
+## part5 missing How to deploy the app in Streamlit Cloud
+
+
+
 ## Enhancing Active Learning: Uploading Data to Roboflow from Windows or Google Colab using the API 
 
 Active learning aims to select the most informative samples from a large pool of unlabeled data to be labeled by usually a human annotator to improve the model’s performance.
@@ -856,7 +1282,36 @@ The Raspberry Pi is a small, versatile device on which you can deploy your compu
 
 Connected to a camera, you can use your Raspberry Pi as a fully-fledged edge inference device. Once you have downloaded your model to the device, an internet connection is not required, so you can use your Raspberry Pi wherever you have power.
 
-Now you have the knowledge you need to start deploying models onto a Raspberry Pi. Happy building!
+Now you have the knowledge you need to start deploying models onto a Raspberry Pi. 
+
+## How to Streamlit app in Raspberry Pi locally
+
+Advantages of Running Locally
+One such advantage is the seamless access to the Raspberry Pi’s built-in camera. By harnessing the potential of the local server, we gain the ability to interact with the camera module directly from our computer, opening up a realm of possibilities for remote surveillance, monitoring, and data collection. This proximity-based approach not only reduces latency but also offers greater control over the application’s performance, ensuring a smoother and more responsive user experience.
+
+In the following sections, I will guide you through the step-by-step process of setting up the Raspberry Pi to run our Streamlit object detection app. So, let’s dive into the world of edge computing and uncover the potential that awaits when we bring AI closer to home.
+
+Prerequisites
+To follow this tutorial you’ll need a Raspberry Pi 4, a camera for it and all the other standard accessories.
+
+Raspberry Pi 4 Model B 4GB or +
+Raspberry Pi Camera Module
+Heat sinks and Fan (optional but recommended)
+5V 3A USB-C Power Supply
+SD card (at least 8gb)
+Raspberry Pi 4 Setup
+PyTorch only provides pip packages for Arm 64bit (aarch64) so you’ll need to install a 64 bit version of the OS on your Raspberry Pi
+
+You can download the version used in this guide arm64 Raspberry Pi OS from https://downloads.raspberrypi.org/raspios_arm64/images/ and install it via rpi-imager use this [tutorial](https://medium.com/@lalodatos/setting-up-your-raspberry-pi-4-wireless-2023-14a1229d374b) I create to install the specific version.
+
+Note: For the moment I only tried with the version mentioned but I’ll do my test and update this post with the results using the latest versions. Also 32-bit Raspberry Pi OS will not work.
+
+Once that boots and you complete the initial setup you’ll need to edit the `/boot/config.txt` file to enable the camera.
+
+Use `cd ..` in the comand line to change folder until you found the boot folder and use `sudo nano config.txt` to be able to modify this file.
+
+
+
 
 ## Challenges I ran into and What I learned
 
